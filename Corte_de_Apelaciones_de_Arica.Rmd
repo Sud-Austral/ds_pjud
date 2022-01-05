@@ -73,64 +73,137 @@ library(ineq)
 library(readstata13)
 library(reldist)
 library(DT)
+library(rio)
 ```
 
 <br>
 
 # R
 
-```{r}
-
-```
-
-
-
-
 la carpeta contiene 1516 tablas
 
 hacemos un MAS generando numeros aleatorios entre 1 y 1516
-
-
-
-
-
-
-```{r}
-set.seed(4)
-a <- sample(2:904, 8, replace=TRUE)
-sort(a)
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-```{r}
-as.data.frame(dir("Corte de Apelaciones de Arica/"))[874,]
-```
-
-
 
 ```{r}
 set.seed(1)
 sample(1:1516, 50, replace=TRUE)
 ```
+```{r}
+archivos <- tibble(dir(pattern = ".xlsx"))
+names(archivos)[1] <- "value"
+archivos[1260,]
+```
+
+
+
+```{r}
+limite <- nrow(archivos) 
+
+output <- vector("list", length = limite)
+for (i in 1:limite ) {
+      tryCatch( {
+  direccion <- paste0(archivos$value[i])
+  cargado <- import(direccion) 
+  
+  ###-------------
+  
+    columnas <- ""
+    for (j in 1:ncol(cargado)) {
+    columnas <- paste(columnas,colnames(cargado)[j],sep = "-")
+    }
+  
+  output[[i]] <- columnas
+      }, error = function(msg){ 
+        print(direccion)})
+  
+}
+combinaciones <- unique(as_tibble(unlist(output)))
+combinaciones
+```
+
+```{r, warning=FALSE, error=FALSE, message=FALSE}
+for (m in 1:nrow(combinaciones)) {
+  assign(paste0("tabla_",m),"")     # se crean variables bacías
+}
+for (i in archivos$value[1:nrow(archivos)]) { # recorre todos los archivos
+# for (i in archivos$value[1:100]) { # recorre todos los archivos
+        tryCatch(
+      {
+  direccion <- paste0(i)
+  cargado <- read_xlsx(direccion)  
+  
+    columnas <- ""
+    for (j in 1:ncol(cargado)) { 
+    columnas <- paste(columnas,colnames(cargado)[j],sep = "-") # extrae combinaciones 
+    } 
+    
+    if(columnas == combinaciones[1,1]){ tabla_1 <- rbind(tabla_1,cargado)}
+    if(columnas == combinaciones[2,1]){ tabla_2 <- rbind(tabla_2,cargado)}
+    if(columnas == combinaciones[3,1]){ tabla_3 <- rbind(tabla_3,cargado)}
+    if(columnas == combinaciones[4,1]){ tabla_4 <- rbind(tabla_4,cargado)}
+    if(columnas == combinaciones[5,1]){ tabla_5 <- rbind(tabla_5,cargado)}
+    if(columnas == combinaciones[6,1]){ tabla_6 <- rbind(tabla_6,cargado)}
+    if(columnas == combinaciones[7,1]){ tabla_7 <- rbind(tabla_7,cargado)}
+    if(columnas == combinaciones[8,1]){ tabla_8 <- rbind(tabla_8,cargado)}
+    if(columnas == combinaciones[9,1]){ tabla_9 <- rbind(tabla_9,cargado)} 
+      }, error = function(msg){
+        print(direccion)})
+}
+
+```
+ 
+```{r}
+tabla_1
+tabla_2
+tabla_3
+tabla_4
+tabla_5
+tabla_6
+tabla_7
+tabla_8
+tabla_9
+```
+
+```{r}
+write_xlsx(tabla_1,"union_tablas/tabla_1.xlsx")
+write_xlsx(tabla_2,"union_tablas/tabla_2.xlsx")
+write_xlsx(tabla_3,"union_tablas/tabla_3.xlsx")
+write_xlsx(tabla_4,"union_tablas/tabla_4.xlsx")
+write_xlsx(tabla_5,"union_tablas/tabla_5.xlsx")
+write_xlsx(tabla_6,"union_tablas/tabla_6.xlsx")
+write_xlsx(tabla_7,"union_tablas/tabla_7.xlsx")
+write_xlsx(tabla_8,"union_tablas/tabla_8.xlsx")
+write_xlsx(tabla_9,"union_tablas/tabla_9.xlsx") 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,751 @@
+---
+title:  | 
+     ![](logo_DataIntelligence_normal.png){width=4in} \
+     Revisión a la data descargada del PJ y su unificación.
+author:
+- name: Equipo DS DI
+  affiliation: DataIntelligence
+subtitle: | 
+  <span style="color:green"> Corte de Apelaciones de Antofagasta </span> 
+  
+header-includes:
+   - \usepackage[]{babel}
+output:
+  rmdformats::html_clean:
+    highlight: kate
+    toc: true
+    use_bookdown: true
+    code_folding: "hide"    
+    
+# bibliography: references.bib 
+---
+
+<!-- http://openaccess.uoc.edu/webapps/o2/bitstream/10609/64085/6/romancalafatiTFG0617memoria.pdf -->
+
+`r format(Sys.time(), "%d-%m-%Y")`
+<style type="text/css">
+.main-container {
+  max-width: 1600px;
+  margin-left: 100px;
+  margin-right: auto;
+}
+</style>
+
+```{r 1, message=FALSE, warning=FALSE, include = FALSE, echo = FALSE}
+# suppressWarnings(library(RODBC))
+library(ggplot2)
+library(ggpubr)
+library(markdown)
+library(shiny)
+library(shinythemes)
+library(tidyverse)
+library(magrittr)
+library(lubridate)
+library(plotly)
+library(xts)
+library(dygraphs)
+library(kableExtra)
+library(knitr)
+library("readxl")
+library(rsconnect)
+library(dplyr)
+library(summarytools)
+library(epiDisplay)
+#library(leaflet)
+library(haven)
+library(epiDisplay)
+library("readxl")
+library(expss)
+library(hrbrthemes)
+library(viridis)
+library(viridisLite)
+library(DescTools)
+library(roperators)
+library(shinycssloaders)
+library(writexl)
+library(labelled)
+library(tidyverse)
+library(haven)
+library(readr)
+library(sjmisc)
+library(WriteXLS)
+library(ineq)
+library(readstata13)
+library(reldist)
+library(DT)
+library(rio)
+```
+
+<br>
+
+
+# Introducción
+
+El poder judicial chileno se divide en 17 Cortes de Apelaciones dentro de cada cual está contenida toda la información disponibibilizada en https://www.pjud.cl/estadisticas/estadisticas-cortes-juzgados.
+
+Por medio de un programa de descarga aplicado a ésta web, se obtuvo **toda** la data disponible en ella mes a mes entre los años 2010 y 2021. 
+
+Nos encontramos con el problema de la unificación de toda ésta data pues contienen distinta información y formatos. Solucionamos el problema agrupando por combinación de cabeceras, lo que siempre nos dió un conjunto acotado de información del mismo tipo que pudimos unir, y nos permitió un criterio para llegar a la información deseada para poder expresarla gráficamente.
+
+Las combinaciones obtenidas para la Corte de Apelaciones de Antofagasta fueron: 
+
+
+1.-Materia-Total-Corte-Tribunal-Competencia-Informe-Año-Mes\
+2.-Tipo Término-Materia-Total-Corte-Tribunal-Competencia-Informe-Año-Mes\
+3.-Materia-Ingresos-Corte-Tribunal-Competencia-Informe-Año-Mes\
+4.-Tipo Audiencia-Cantidad de Audiencias-Duración Promedio en Minutos\ (MM)-Corte-Tribunal-Competencia-Informe-Año-Mes\
+5.-Tipo de Causa-Total-Corte-Tribunal-Competencia-Informe-Año-Mes\
+6.-Tribunal-Total-Corte-Competencia-Informe-Año-Mes\
+7.-Tribunal-Motivo Término-Total-Corte-Competencia-Informe-Año-Mes\
+8.-Secretaría-Total-Corte-Tribunal-Competencia-Informe-Año-Mes\
+9.-Año Ingreso Corte-Total-Corte-Tribunal-Competencia-Informe-Año-Mes\
+10.-Sala-Total-Corte-Tribunal-Competencia-Informe-Año-Mes\
+
+El presente trabajo contiene el resultado para la Corte de Apelaciones de Antofagasta, en la que sobre cada una de las 101 tablas generadas se pueden efectuar filtros y obtener lo que se quiera, pues toda la data está contenida ahí bajo el criterio de Tribunal, mes, año e informe y algunas veces competencia (presente en los pleitos civiles y familiares)
+
+Para verificar la integridad de los datos se aplicó un muestreo aleatorio simple dándonos un 100% de aciertos. Se incluye el método en éste trabajo también y se deduce entonces que si el mismo programa es aplicado a todas las cortes obtendremos resultados consistentes.
+
+En éste momento nos encontramos a la espera de la descarga total de las Cortes y unirlas, con la intención de generar sólo 10 tablas globales para llegar a una sola final.
+
+Las tablas generadas se encuentran el nuestro repositorio ds_pjud y en Notion.
+
+# Parte I: Unificación de las tablas
+
+## Leemos los nombres de los excels (8056 tablas)
+
+```{r 2}
+archivos <- tibble(dir("Corte de Apelaciones de Antofagasta/", pattern = ".xlsx"))
+names(archivos)[1] <- "value"
+archivos
+
+abc <- archivos[c(1:10),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+
+```
+
+## Obtenemos las ombinaciones de las cabeceras
+
+Transformamos cada nombre leído, correspondiente a un excel leyéndolo a un dataframe y extraemos todas las combinaciones existentes de las cabeceras:
+
+```{r 3}
+limite <- nrow(archivos)
+output <- vector("list", length = limite)
+
+
+for (i in 1:limite ) {
+      tryCatch( {
+  direccion <- paste0("Corte de Apelaciones de Antofagasta/",archivos$value[i])
+  cargado <- import(direccion) 
+  
+  ###-------------
+  
+    columnas <- ""
+    for (j in 1:ncol(cargado)) {
+    columnas <- paste(columnas,colnames(cargado)[j],sep = "-")
+    }
+  
+  output[[i]] <- columnas
+      }, error = function(msg){ 
+        print(direccion)})
+  
+}
+combinaciones <- unique(as_tibble(unlist(output)))
+
+
+datatable(combinaciones, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+## Unimos por cada una de las 10 combinaciones generadas:
+
+```{r 4, warning=FALSE, error=FALSE, message=FALSE}
+for (m in 1:nrow(combinaciones)) {
+  assign(paste0("tabla_",m),"")     # se crean variables bacías
+}
+for (i in archivos$value[1:nrow(archivos)]) { # recorre todos los archivos
+# for (i in archivos$value[1:100]) { # recorre todos los archivos
+        tryCatch(
+      {
+  direccion <- paste0("Corte de Apelaciones de Antofagasta/",i)
+  cargado <- read_xlsx(direccion)  
+  
+    columnas <- ""
+    for (j in 1:ncol(cargado)) { 
+    columnas <- paste(columnas,colnames(cargado)[j],sep = "-") # extrae combinaciones 
+    } 
+    
+    if(columnas == combinaciones[1,1]){ tabla_1 <- rbind(tabla_1,cargado)}
+    if(columnas == combinaciones[2,1]){ tabla_2 <- rbind(tabla_2,cargado)}
+    if(columnas == combinaciones[3,1]){ tabla_3 <- rbind(tabla_3,cargado)}
+    if(columnas == combinaciones[4,1]){ tabla_4 <- rbind(tabla_4,cargado)}
+    if(columnas == combinaciones[5,1]){ tabla_5 <- rbind(tabla_5,cargado)}
+    if(columnas == combinaciones[6,1]){ tabla_6 <- rbind(tabla_6,cargado)}
+    if(columnas == combinaciones[7,1]){ tabla_7 <- rbind(tabla_7,cargado)}
+    if(columnas == combinaciones[8,1]){ tabla_8 <- rbind(tabla_8,cargado)}
+    if(columnas == combinaciones[9,1]){ tabla_9 <- rbind(tabla_9,cargado)} 
+    if(columnas == combinaciones[10,1]){ tabla_10 <- rbind(tabla_10,cargado)} 
+      }, error = function(msg){
+        print(direccion)})
+}
+
+```
+
+1.-Materia-Total-Corte-Tribunal-Competencia-Informe-Año-Mes\
+
+```{r}
+abc <- tabla_1[c(1:10),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+2.-Tipo Término-Materia-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
+
+```{r}
+abc <- tabla_2[c(1:10),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+3.-Materia-Ingresos-Corte-Tribunal-Competencia-Informe-Año-Mes
+
+
+```{r}
+abc <- tabla_3[c(1:10),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+4.-Tipo Audiencia-Cantidad de Audiencias-Duración Promedio en Minutos (MM)-Corte-Tribunal-Competencia-Informe-Año-Mes
+
+
+```{r}
+abc <- tabla_4[c(1:10),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+5.-Tipo de Causa-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
+
+
+```{r}
+abc <- tabla_5[c(1:10),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+6.-Tribunal-Total-Corte-Competencia-Informe-Año-Mes
+
+
+```{r}
+abc <- tabla_6[c(1:10),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+7.-Tribunal-Motivo Término-Total-Corte-Competencia-Informe-Año-Mes
+
+
+```{r}
+abc <- tabla_7[c(1:10),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+8.-Secretaría-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
+
+
+```{r}
+abc <- tabla_8[c(1:10),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+
+9.-Año Ingreso Corte-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
+
+```{r}
+abc <- tabla_9[c(1:10),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+
+10.-Sala-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
+
+```{r}
+abc <- tabla_10[c(1:10),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+
+```
+
+
+
+
+```{r}
+# tabla_1
+# tabla_2
+# tabla_3
+# tabla_4
+# tabla_5
+# tabla_6
+# tabla_7
+# tabla_8
+# tabla_9
+# tabla_10
+```
+
+## Generamos los xlsx 
+
+
+```{r 5}
+write_xlsx(tabla_1,"union_tablas_Antofagasta/tabla_1.xlsx")
+write_xlsx(tabla_2,"union_tablas_Antofagasta/tabla_2.xlsx")
+write_xlsx(tabla_3,"union_tablas_Antofagasta/tabla_3.xlsx")
+write_xlsx(tabla_4,"union_tablas_Antofagasta/tabla_4.xlsx")
+write_xlsx(tabla_5,"union_tablas_Antofagasta/tabla_5.xlsx")
+write_xlsx(tabla_6,"union_tablas_Antofagasta/tabla_6.xlsx")
+write_xlsx(tabla_7,"union_tablas_Antofagasta/tabla_7.xlsx")
+write_xlsx(tabla_8,"union_tablas_Antofagasta/tabla_8.xlsx")
+write_xlsx(tabla_9,"union_tablas_Antofagasta/tabla_9.xlsx") 
+write_xlsx(tabla_10,"union_tablas_Antofagasta/tabla_10.xlsx") 
+```
+
+# Parte II: Aplicación de un muestreo aleatorio simple (MAS) a las tablas unidas.
+
+## MAS a la tabla 1
+
+## Hacemos un MAS generando 10 numeros aleatorios entre 1 y 44562
+
+```{r 6}
+nrow(tabla_1)
+```
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r 7}
+set.seed(546)
+aleatorios <- sample(1:44562, 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in aleatorios){
+   resultado <- tabla_1[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+
+
+## MAS a la tabla 2
+
+## Hacemos un MAS generando 10 numeros aleatorios entre 1 y 49836 
+
+```{r 8}
+nrow(tabla_2)
+```
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r 9}
+set.seed(351)
+aleatorios <- sample(1:49836 , 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in aleatorios){
+   resultado <- tabla_2[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+ 
+
+
+## MAS a la tabla 3
+
+## Hacemos un MAS generando 10 numeros aleatorios entre 1 y  14640
+
+```{r 10}
+nrow(tabla_3)
+```
+
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r 11}
+set.seed(888)
+aleatorios <- sample(1:14640 , 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in aleatorios){
+   resultado <- tabla_3[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+
+
+
+
+## MAS a la tabla 4
+
+## Hacemos un MAS generando 10 numeros aleatorios entre 1 y 11873
+
+```{r 12}
+nrow(tabla_4)
+```
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r 13}
+set.seed(3)
+aleatorios <- sample(1:11873 , 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in aleatorios){
+   resultado <- tabla_4[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+
+## MAS a la tabla 5
+
+## Hacemos un MAS generando 10 numeros aleatorios entre 1 y 5268
+
+```{r 14}
+nrow(tabla_5)
+```
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r 15}
+set.seed(67)
+aleatorios <- sample(1:5268 , 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in aleatorios){
+   resultado <- tabla_5[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+
+## MAS a la tabla 6
+
+## Hacemos un MAS generando 10 numeros aleatorios entre  
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r}
+set.seed(136)
+aleatorios <- sample(1:nrow(tabla_6), 10, replace=TRUE)
+receptaculo <- data.frame()
+
+for(i in aleatorios){
+   resultado <- tabla_6[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+## MAS a la tabla 7
+
+## Hacemos un MAS generando 10 numeros aleatorios entre  
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r}
+set.seed(876)
+aleatorios <- sample(1:nrow(tabla_7), 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in sort(aleatorios)){
+   resultado <- tabla_7[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+## MAS a la tabla 8
+
+## Hacemos un MAS generando 10 numeros aleatorios entre  
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r}
+set.seed(234)
+aleatorios <- sample(1:nrow(tabla_8), 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in sort(aleatorios)){
+   resultado <- tabla_8[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+ 
+## MAS a la tabla 9
+
+## Hacemos un MAS generando 10 numeros aleatorios entre  
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r}
+set.seed(546)
+aleatorios <- sample(1:nrow(tabla_9), 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in sort(aleatorios)){
+   resultado <- tabla_9[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+## MAS a la tabla 10
+
+## Hacemos un MAS generando 10 numeros aleatorios entre  
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r}
+set.seed(289)
+aleatorios <- sample(1:nrow(tabla_10), 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in sort(aleatorios)){
+   resultado <- tabla_10[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+
+Se compara el muestreo con la data extrayéndola en forma manual de https://www.pjud.cl coincidiendo el 100%.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
