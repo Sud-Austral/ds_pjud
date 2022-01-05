@@ -116,7 +116,6 @@ Las tablas generadas se encuentran el nuestro repositorio ds_pjud y en Notion.
 ```{r 2}
 archivos <- tibble(dir("Corte de Apelaciones de Antofagasta/", pattern = ".xlsx"))
 names(archivos)[1] <- "value"
-archivos
 
 abc <- archivos[c(1:10),]
 
@@ -133,7 +132,7 @@ datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
 
 ```
 
-## Obtenemos las ombinaciones de las cabeceras
+## Obtenemos las combinaciones de las cabeceras
 
 Transformamos cada nombre leído, correspondiente a un excel leyéndolo a un dataframe y extraemos todas las combinaciones existentes de las cabeceras:
 
@@ -174,7 +173,7 @@ datatable(combinaciones, extensions = 'Buttons', escape = FALSE, rownames = TRUE
           text = 'Download')), scrollX = TRUE))
 ```
 
-## Unimos por cada una de las 10 combinaciones generadas:
+
 
 ```{r 4, warning=FALSE, error=FALSE, message=FALSE}
 for (m in 1:nrow(combinaciones)) {
@@ -208,10 +207,13 @@ for (i in archivos$value[1:nrow(archivos)]) { # recorre todos los archivos
 
 ```
 
-1.-Materia-Total-Corte-Tribunal-Competencia-Informe-Año-Mes\
+
+## Unimos por cada una de las 10 combinaciones generadas, desplegando los 100 primeros registros de las tablas:
+
+### -Materia-Total-Corte-Tribunal-Competencia-Informe-Año-Mes\
 
 ```{r}
-abc <- tabla_1[c(1:10),]
+abc <- tabla_1[c(1:100),]
 
 datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           options = list(dom = 'Bfrtip',
@@ -225,10 +227,10 @@ datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           text = 'Download')), scrollX = TRUE))
 ```
 
-2.-Tipo Término-Materia-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
+### -Tipo Término-Materia-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
 
 ```{r}
-abc <- tabla_2[c(1:10),]
+abc <- tabla_2[c(1:100),]
 
 datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           options = list(dom = 'Bfrtip',
@@ -242,11 +244,11 @@ datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           text = 'Download')), scrollX = TRUE))
 ```
 
-3.-Materia-Ingresos-Corte-Tribunal-Competencia-Informe-Año-Mes
+### -Materia-Ingresos-Corte-Tribunal-Competencia-Informe-Año-Mes
 
 
 ```{r}
-abc <- tabla_3[c(1:10),]
+abc <- tabla_3[c(1:100),]
 
 datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           options = list(dom = 'Bfrtip',
@@ -260,11 +262,11 @@ datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           text = 'Download')), scrollX = TRUE))
 ```
 
-4.-Tipo Audiencia-Cantidad de Audiencias-Duración Promedio en Minutos (MM)-Corte-Tribunal-Competencia-Informe-Año-Mes
+### -Tipo Audiencia-Cantidad de Audiencias-Duración Promedio en Minutos (MM)-Corte-Tribunal-Competencia-Informe-Año-Mes
 
 
 ```{r}
-abc <- tabla_4[c(1:10),]
+abc <- tabla_4[c(1:100),]
 
 datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           options = list(dom = 'Bfrtip',
@@ -278,11 +280,11 @@ datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           text = 'Download')), scrollX = TRUE))
 ```
 
-5.-Tipo de Causa-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
+### -Tipo de Causa-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
 
 
 ```{r}
-abc <- tabla_5[c(1:10),]
+abc <- tabla_5[c(1:100),]
 
 datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           options = list(dom = 'Bfrtip',
@@ -296,11 +298,11 @@ datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           text = 'Download')), scrollX = TRUE))
 ```
 
-6.-Tribunal-Total-Corte-Competencia-Informe-Año-Mes
+### -Tribunal-Total-Corte-Competencia-Informe-Año-Mes
 
 
 ```{r}
-abc <- tabla_6[c(1:10),]
+abc <- tabla_6[c(1:100),]
 
 datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           options = list(dom = 'Bfrtip',
@@ -314,11 +316,11 @@ datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           text = 'Download')), scrollX = TRUE))
 ```
 
-7.-Tribunal-Motivo Término-Total-Corte-Competencia-Informe-Año-Mes
+### -Tribunal-Motivo Término-Total-Corte-Competencia-Informe-Año-Mes
 
 
 ```{r}
-abc <- tabla_7[c(1:10),]
+abc <- tabla_7[c(1:100),]
 
 datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           options = list(dom = 'Bfrtip',
@@ -332,29 +334,11 @@ datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           text = 'Download')), scrollX = TRUE))
 ```
 
-8.-Secretaría-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
+### -Secretaría-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
 
 
 ```{r}
-abc <- tabla_8[c(1:10),]
-
-datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
-          options = list(dom = 'Bfrtip',
-          buttons = list('colvis', list(extend = 'collection',
-          buttons = list(
-          list(extend='copy'),
-          list(extend='excel',
-            filename = 'tabla'),
-          list(extend='pdf',
-            filename= 'tabla')),
-          text = 'Download')), scrollX = TRUE))
-```
-
-
-9.-Año Ingreso Corte-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
-
-```{r}
-abc <- tabla_9[c(1:10),]
+abc <- tabla_8[c(1:100),]
 
 datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           options = list(dom = 'Bfrtip',
@@ -369,10 +353,28 @@ datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
 ```
 
 
-10.-Sala-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
+### -Año Ingreso Corte-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
 
 ```{r}
-abc <- tabla_10[c(1:10),]
+abc <- tabla_9[c(1:100),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+
+### -Sala-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
+
+```{r}
+abc <- tabla_10[c(1:100),]
 
 datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           options = list(dom = 'Bfrtip',
@@ -423,7 +425,7 @@ write_xlsx(tabla_10,"union_tablas_Antofagasta/tabla_10.xlsx")
 
 ## MAS a la tabla 1
 
-## Hacemos un MAS generando 10 numeros aleatorios entre 1 y 44562
+Hacemos un MAS generando 10 números aleatorios entre 1 y 44562
 
 ```{r 6}
 nrow(tabla_1)
@@ -458,7 +460,7 @@ datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
 
 ## MAS a la tabla 2
 
-## Hacemos un MAS generando 10 numeros aleatorios entre 1 y 49836 
+Hacemos un MAS generando 10 números aleatorios entre 1 y 49836 
 
 ```{r 8}
 nrow(tabla_2)
@@ -493,7 +495,7 @@ datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
 
 ## MAS a la tabla 3
 
-## Hacemos un MAS generando 10 numeros aleatorios entre 1 y  14640
+Hacemos un MAS generando 10 números aleatorios entre 1 y  14640
 
 ```{r 10}
 nrow(tabla_3)
@@ -524,13 +526,9 @@ datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
           text = 'Download')), scrollX = TRUE))
 ```
 
-
-
-
-
 ## MAS a la tabla 4
 
-## Hacemos un MAS generando 10 numeros aleatorios entre 1 y 11873
+Hacemos un MAS generando 10 números aleatorios entre 1 y 11873
 
 ```{r 12}
 nrow(tabla_4)
@@ -563,7 +561,7 @@ datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
 
 ## MAS a la tabla 5
 
-## Hacemos un MAS generando 10 numeros aleatorios entre 1 y 5268
+Hacemos un MAS generando 10 números aleatorios entre 1 y 5268
 
 ```{r 14}
 nrow(tabla_5)
@@ -596,7 +594,7 @@ datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
 
 ## MAS a la tabla 6
 
-## Hacemos un MAS generando 10 numeros aleatorios entre  
+Hacemos un MAS generando 10 números aleatorios entre  
 
 el seed lo hacemos variar entre 1 y 1000
 
@@ -623,7 +621,7 @@ datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
 
 ## MAS a la tabla 7
 
-## Hacemos un MAS generando 10 numeros aleatorios entre  
+Hacemos un MAS generando 10 números aleatorios entre  
 
 el seed lo hacemos variar entre 1 y 1000
 
@@ -651,7 +649,7 @@ datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
 
 ## MAS a la tabla 8
 
-## Hacemos un MAS generando 10 numeros aleatorios entre  
+Hacemos un MAS generando 10 números aleatorios entre  
 
 el seed lo hacemos variar entre 1 y 1000
 
@@ -679,7 +677,7 @@ datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
  
 ## MAS a la tabla 9
 
-## Hacemos un MAS generando 10 numeros aleatorios entre  
+Hacemos un MAS generando 10 números aleatorios entre  
 
 el seed lo hacemos variar entre 1 y 1000
 
@@ -707,7 +705,7 @@ datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
 
 ## MAS a la tabla 10
 
-## Hacemos un MAS generando 10 numeros aleatorios entre  
+Hacemos un MAS generando 10 números aleatorios entre  
 
 el seed lo hacemos variar entre 1 y 1000
 
