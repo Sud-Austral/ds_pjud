@@ -1,0 +1,1050 @@
+---
+title:  | 
+     ![](logo_DataIntelligence_normal.png){width=4in} \
+     TABLA MADRE \
+     Unificación de la data descargada del PJUD de Chile y su revisión 
+     con un Muestreo Aleatorio Simple.
+author:
+- name: Equipo DS DI
+  affiliation: DataIntelligence
+subtitle: | 
+  <span style="color:green"> Caso: Corte de Apelaciones de Antofagasta </span> 
+  
+header-includes:
+   - \usepackage[]{babel}
+output:
+  rmdformats::html_clean:
+    highlight: kate
+    toc: true
+    use_bookdown: true
+    code_folding: "hide"    
+    
+# bibliography: references.bib 
+---
+
+<!-- http://openaccess.uoc.edu/webapps/o2/bitstream/10609/64085/6/romancalafatiTFG0617memoria.pdf -->
+
+`r format(Sys.time(), "%d-%m-%Y")`
+<style type="text/css">
+.main-container {
+  max-width: 1600px;
+  margin-left: 100px;
+  margin-right: auto;
+}
+</style>
+
+```{r 1, message=FALSE, warning=FALSE, include = FALSE, echo = FALSE}
+# suppressWarnings(library(RODBC))
+library(ggplot2)
+library(ggpubr)
+library(markdown)
+library(shiny)
+library(shinythemes)
+library(tidyverse)
+library(magrittr)
+library(lubridate)
+library(plotly)
+library(xts)
+library(dygraphs)
+library(kableExtra)
+library(knitr)
+library("readxl")
+library(rsconnect)
+library(dplyr)
+library(summarytools)
+library(epiDisplay)
+#library(leaflet)
+library(haven)
+library(epiDisplay)
+library("readxl")
+library(expss)
+library(hrbrthemes)
+library(viridis)
+library(viridisLite)
+library(DescTools)
+library(roperators)
+library(shinycssloaders)
+library(writexl)
+library(labelled)
+library(tidyverse)
+library(haven)
+library(readr)
+library(sjmisc)
+library(WriteXLS)
+library(ineq)
+library(readstata13)
+library(reldist)
+library(DT)
+library(rio)
+```
+
+<br>
+
+# Introducción
+
+El poder judicial chileno se divide en 17 Cortes de Apelaciones dentro de cada cual está contenida toda la información disponibibilizada en https://www.pjud.cl/estadisticas/estadisticas-cortes-juzgados.
+
+Por medio de un programa de descarga aplicado a ésta web, se obtuvo **toda** la data disponible en ella mes a mes entre los años 2010 y 2021. 
+
+Nos encontramos con el problema de la unificación de toda ésta data pues contienen distinta información y formatos. Solucionamos el problema agrupando por combinación de cabeceras, lo que siempre nos dió un conjunto acotado de información del mismo tipo que pudimos unir, y nos permitió un criterio para llegar a la información deseada para poder expresarla gráficamente.
+
+Las combinaciones obtenidas para la Corte de Apelaciones de Antofagasta (y que se generalizan a todas las Cortes -cuando exista alguna excepción lo indicaremos-) fueron las que se detallan a continuación:
+
+Todas las tablas registros con el año y el mes al que se refieren, como asimismo a la Corte de Apelaciones y tribunal al que pertenecen, por lo que sólo indicaremos la información que contienen en específico y que las diferencia de las demás.
+
+El presente trabajo contiene el resultado para la Corte de Apelaciones de Antofagasta, en la que sobre cada una de las 10 tablas generadas se pueden efectuar filtros y obtener lo que se quiera, pues toda la data está contenida ahí bajo el criterio de Tribunal, mes, año e informe y algunas veces competencia (presente en los pleitos civiles y familiares)
+
+Para verificar la integridad de los datos se aplicó un muestreo aleatorio simple dándonos un 100% de aciertos. Se incluye el método en éste trabajo también y se deduce entonces que si el mismo programa es aplicado a todas las cortes obtendremos resultados consistentes.
+
+En éste momento nos encontramos a la espera de la descarga total de las Cortes y unirlas, con la intención de generar sólo 10 tablas globales para unirlas en una sola final.
+
+También es ésta un informe que adjunta a la mustra de las tablas que es lo que significan, para una comprensión rápida de su contenido.
+
+Las tablas generadas se encuentran el nuestro repositorio ds_pjud y en Notion.
+
+# Parte I: Unificación de las tablas
+
+## Leemos los nombres de los excels (8056 tablas)
+
+```{r 2, echo = FALSE}
+archivos <- tibble(dir("Corte de Apelaciones de Antofagasta/", pattern = ".xlsx"))
+names(archivos)[1] <- "value"
+
+abc <- archivos[c(1:10),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+
+```
+
+## Obtenemos las combinaciones de las cabeceras
+
+Transformamos cada nombre leído, correspondiente a un excel leyéndolo a un dataframe y extraemos todas las combinaciones existentes de las cabeceras:
+
+```{r 3, echo = FALSE}
+limite <- nrow(archivos)
+output <- vector("list", length = limite)
+
+
+for (i in 1:limite ) {
+      tryCatch( {
+  direccion <- paste0("Corte de Apelaciones de Antofagasta/",archivos$value[i])
+  cargado <- import(direccion) 
+  
+  ###-------------
+  
+    columnas <- ""
+    for (j in 1:ncol(cargado)) {
+    columnas <- paste(columnas,colnames(cargado)[j],sep = "-")
+    }
+  
+  output[[i]] <- columnas
+      }, error = function(msg){ 
+        print(direccion)})
+  
+}
+combinaciones <- unique(as_tibble(unlist(output)))
+
+
+datatable(combinaciones, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+```{r 4, warning=FALSE, error=FALSE, message=FALSE, echo = FALSE}
+for (m in 1:nrow(combinaciones)) {
+  assign(paste0("tabla_",m),"")     # se crean variables bacías
+}
+for (i in archivos$value[1:nrow(archivos)]) { # recorre todos los archivos
+# for (i in archivos$value[1:100]) { # recorre todos los archivos
+        tryCatch(
+      {
+  direccion <- paste0("Corte de Apelaciones de Antofagasta/",i)
+  cargado <- read_xlsx(direccion)  
+  
+    columnas <- ""
+    for (j in 1:ncol(cargado)) { 
+    columnas <- paste(columnas,colnames(cargado)[j],sep = "-") # extrae combinaciones 
+    } 
+    
+    if(columnas == combinaciones[1,1]){ tabla_1 <- rbind(tabla_1,cargado)}
+    if(columnas == combinaciones[2,1]){ tabla_2 <- rbind(tabla_2,cargado)}
+    if(columnas == combinaciones[3,1]){ tabla_3 <- rbind(tabla_3,cargado)}
+    if(columnas == combinaciones[4,1]){ tabla_4 <- rbind(tabla_4,cargado)}
+    if(columnas == combinaciones[5,1]){ tabla_5 <- rbind(tabla_5,cargado)}
+    if(columnas == combinaciones[6,1]){ tabla_6 <- rbind(tabla_6,cargado)}
+    if(columnas == combinaciones[7,1]){ tabla_7 <- rbind(tabla_7,cargado)}
+    if(columnas == combinaciones[8,1]){ tabla_8 <- rbind(tabla_8,cargado)}
+    if(columnas == combinaciones[9,1]){ tabla_9 <- rbind(tabla_9,cargado)} 
+    if(columnas == combinaciones[10,1]){ tabla_10 <- rbind(tabla_10,cargado)} 
+      }, error = function(msg){
+        print(direccion)})
+}
+
+```
+
+
+## Unimos por cada una de las 10 combinaciones generadas, desplegando los 100 primeros registros de cada una de las tablas:
+
+### tabla 1 
+
+La tabla 1 contempla la **Frecuencia de pleitos** (pleitos porque no se juzgan necesariamente delitos, sino que solicitudes para una baja del monto de una pensión de alimentos, por ejemplo) por tipo en el que están encargadas las sedes judiciales  pertenecientes a la respectiva corte. Contiene 454 delitos o pleitos agrupados en las siguientes sedes judiciales:
+
+"Juzgado De Letras De Tocopilla"\           
+"Juzgado De Garantia De Tocopilla"\               
+"Juzgado De Letras Y Garantia De Maria Elena"\     
+"Tribunal De Juicio Oral En Lo Penal De Calama"\    
+"Juzgado De Familia De Calama"\                  
+"Juzgado De Letras Del Trabajo De Calama"\         
+"Juzgado De Garantia De Calama"\                 
+"Tribunal De Juicio Oral En Lo Penal De Antofagasta"\
+"Juzgado De Familia De Antofagasta"\                
+"Juzgado De Letras Del Trabajo De Antofagasta"\    
+"Juzgado De Garantia De Antofagasta"\             
+"Juzgado De Letras Y Garantia De Mejillones"\     
+"Juzgado De Letras Y Garantia De Taltal"\
+
+Bajo las siguientes **competencias**:
+
+"Cobranza"\ 
+"Familia"\   
+"Laboral"\     
+"Sin_Competencia"\
+"Garantia"\
+
+e **informes**:
+
+"Ingresos Causas Por Procedimiento"\
+"Sentencias Por Procedimiento"\
+"Ingresos Causas Por Materia"\      
+"Sentencias Por Delito"\ 
+
+```{r 5, echo = FALSE}
+abc <- tabla_1[c(1:100),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+### La tabla 2 
+
+La tabla 2 contempla 71 **tipos de término** asociados a 551 **Materias** en los siguientes tribunales:
+
+"Juzgado De Letras De Tocopilla"\                    
+"Juzgado De Garantia De Tocopilla"\                  
+"Juzgado De Letras Y Garantia De Maria Elena"\       
+"Tribunal De Juicio Oral En Lo Penal De Calama"\     
+"1º Juzgado De Letras De Calama"\                    
+"2º Juzgado De Letras De Calama"\                    
+"3º Juzgado De Letras De Calama"\                    
+"Juzgado De Familia De Calama"\                      
+"Juzgado De Letras Del Trabajo De Calama"\           
+"Juzgado De Garantia De Calama"\                     
+"Tribunal De Juicio Oral En Lo Penal De Antofagasta"\
+"1º Juzgado De Letras En Lo Civil De Antofagasta"\   
+"2º Juzgado De Letras En Lo Civil De Antofagasta"\   
+"3º Juzgado De Letras En Lo Civil De Antofagasta"\   
+"4º Juzgado De Letras En Lo Civil De Antofagasta"\   
+"Juzgado De Familia De Antofagasta"\                 
+"Juzgado De Letras Del Trabajo De Antofagasta"\      
+"Juzgado De Garantia De Antofagasta"\                
+"Juzgado De Letras Y Garantia De Mejillones"\        
+"Juzgado De Letras Y Garantia De Taltal"\  
+
+Asociados a las siguientes **Competencias**:
+
+"Cobranza"\        
+"Civil"\           
+"Familia"\         
+"Laboral"\        
+"Sin_Competencia"\ 
+"Garantia"\ 
+
+que a su vez se asocian a los siguientes tipos de **Informes**:
+
+"Terminos"\                                         
+"Término de causas por materia y motivo de término"\
+"Terminos Por Materia"\ 
+
+```{r 6,  echo = FALSE}
+abc <- tabla_2[c(1:100),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+### tabla 3 
+
+La tabla 3 contempla las frecuencias de los **ingresos de pleitos civiles**, que caben en 184 categorías dentro los siguientes tribunales:
+
+"Juzgado De Letras De Tocopilla"\                 
+"Juzgado De Letras Y Garantia De Maria Elena"\    
+"1º Juzgado De Letras De Calama"\                 
+"2º Juzgado De Letras De Calama"\                 
+"3º Juzgado De Letras De Calama"\                 
+"1º Juzgado De Letras En Lo Civil De Antofagasta"\
+"2º Juzgado De Letras En Lo Civil De Antofagasta"\
+"3º Juzgado De Letras En Lo Civil De Antofagasta"\
+"4º Juzgado De Letras En Lo Civil De Antofagasta"\
+"Juzgado De Letras Y Garantia De Mejillones"\     
+"Juzgado De Letras Y Garantia De Taltal"\   
+
+asociadas a competencias:
+
+"Civil"\           
+"Sin_Competencia"\
+
+a su vez asociadas a los informes:
+
+"Ingresos"\
+
+```{r 7,  echo = FALSE}
+abc <- tabla_3[c(1:100),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+### tabla 4 
+
+La tabla 4 contempla **la cantidad y duración de audiencias por tipo de audiencia**, las cuales son 118 categorías en los siguientes tribunales:
+
+"Juzgado De Letras De Tocopilla"\                    
+"Juzgado De Garantia De Tocopilla"\                  
+"Juzgado De Letras Y Garantia De Maria Elena"\       
+"Tribunal De Juicio Oral En Lo Penal De Calama"\     
+"Juzgado De Familia De Calama"\                      
+"Juzgado De Letras Del Trabajo De Calama"\           
+"Juzgado De Garantia De Calama"\                     
+"Tribunal De Juicio Oral En Lo Penal De Antofagasta"\
+"Juzgado De Familia De Antofagasta"\                 
+"Juzgado De Letras Del Trabajo De Antofagasta"\      
+"Juzgado De Garantia De Antofagasta"\                
+"Juzgado De Letras Y Garantia De Mejillones"\        
+"Juzgado De Letras Y Garantia De Taltal"\ 
+
+asociados a las siguientes competencias:
+
+"Familia"\         
+"Laboral"\         
+"Sin_Competencia"\ 
+"Garantia"\ 
+
+asociadas a su vez a los siguientes informes:
+
+"Audiencias"\
+
+```{r 8,  echo = FALSE}
+abc <- tabla_4[c(1:100),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+### tabla 5 
+
+Causa petendi es la voz latina que significa en español "causa de pedir".
+
+En el ámbito del derecho procesal o adjetivo, la locución latina "causa petendi" se utiliza para definir cuáles son los hechos por los que el actor o quien inicia un juicio se ve compelido a incoar el procedimiento jurisdiccional intentado.
+
+En glosa y en abundancia a lo que podemos decir sobre esta voz propia del argot del derecho procesal, es de acotarse que en una contienda jurisdiccional la causa petendi da luego génesis al petitum, del cual existen habitualmente dos tipos: uno genérico y el otro específico. El genérico no es otra cosa más que el pedimento de justicia que mueve al actor a hacer uso del aparato de justicia que el Estado pone a su servicio; mientras que el específico se ve conformado por los puntos concretos de los que se ocupará finalmente la contención iniciada y son aquellos que precisamente proyecta obtener el demandante mediante la sentencia futura. Para este último caso podemos citar como ejemplo el siguiente: En un juicio de desahucio, la "causa petendi" son los hechos que mueven al actor a entablar una reyerta en contra del demandado, mientras que el petitum es -por lo regular- la desocupación del inmueble y el pago de las rentas atrasadas.
+
+Un efecto que la causa petendi provoca en el proceso, es la fijación de la litis, pues una vez propalada cuál es la causa de pedir del actor, luego éste no podrá ampliarla en una etapa intermedia del juicio, salvo que la legislación adjetiva lo permita explícitamente.
+
+En la mayoría de las regulaciones legislativas que existen sobre los procesos contenciosos, el creador de la norma inserta disposiciones que obligan a los tribunales a resolver plenariamente las pretensiones de las partes, salvaguardando así la impartición de una justicia completa y eficaz, cualidades esta últimas de la labor jurisdiccional que se obtienen sólo después de atender con fidelidad a la causa petendi y al petitum cuya formal exteriorización por parte del litigante motivó la reyerta. 
+
+La tabla 5 contempla **la frecuencia del tipo de causa**. Los tipos de causa son:
+
+"Contenciosa"\                
+"Cumplimiento"\              
+"Mediación"\                  
+"Medidas De Proteccion"\      
+"Transacción"\               
+"Violencia Intrafamiliar"\    
+"Voluntaria"\                 
+"Adopción"\                  
+"Identidad De Genero"\        
+"Protección Salud Mental"\    
+"Avenimiento"\               
+"Incompetencia"\              
+"No Da Curso A La Demanda"\   
+"No Da Curso A La Solicitud"\
+"Sentencia"\                  
+"Conciliación"\               
+"Desistimiento"\             
+"Abandono Del Procedimiento"\ 
+"Retiro"\                     
+"Menores"\  
+
+que se agrupan en los siguientes tribunales, siempre civiles o familiares:
+
+"Juzgado De Letras De Tocopilla"\             
+"Juzgado De Letras Y Garantia De Maria Elena"\ 
+"Juzgado De Familia De Calama"\               
+"Juzgado De Familia De Antofagasta"\           
+"Juzgado De Letras Y Garantia De Mejillones"\ 
+"Juzgado De Letras Y Garantia De Taltal"\  
+
+Asociadas a las siguientes Competencias
+
+"Familia"\         
+"Sin_Competencia"\
+
+A su vez asociadas a los siguientes informes:
+
+"Ingresos Causas Por Rol"\ 
+"Terminos Por Rol"\
+
+
+```{r 9,  echo = FALSE}
+abc <- tabla_5[c(1:100),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+### tabla 6 
+
+Ésta tabla expresa la frecuencia por cada tribunal perteneciente a su Corte de apelaciones, por Competencia, **los Ingresos de Causas Por Rol**:
+
+Tribunal:
+
+"Juzgado De Garantia De Tocopilla"\                  
+"Juzgado De Letras Y Garantia De Maria Elena"\       
+"Tribunal De Juicio Oral En Lo Penal De Calama"\     
+"Juzgado De Garantia De Calama"\                     
+"Tribunal De Juicio Oral En Lo Penal De Antofagasta"\
+"Juzgado De Garantia De Antofagasta"\                
+"Juzgado De Letras Y Garantia De Mejillones"\        
+"Juzgado De Letras Y Garantia De Taltal"\  
+
+Competencia:
+
+"Sin_Competencia"\ 
+"Garantia" 
+
+```{r 10,  echo = FALSE}
+abc <- tabla_6[c(1:100),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+### tabla 7 
+
+La tabla 7 indica la frecuencia por categoría, **del motivo del término procesal de las faltas, delitos o crímenes**, asociándole a cada registro su competencia y el informe.
+
+Son 13 los motivos de término de los pleitos judiciales:
+
+"Absolución O Condena."\                             
+"Acoge Requerimiento (Monitorio)."\                  
+"Acumulación."\                                      
+"Aprobación No Inicio Investigación."\               
+"Comunica Y/O Aplica Decisión Ppio. De Oportunidad."\
+"Declara Incompetencia Rpa"\                         
+"Declara Incompetencia."\                            
+"Declara Sobreseimiento Definitivo."\                
+"No Perseverar En El Procedimiento."\                
+"Sentencia."\                                        
+"Desistimiento Querella."\                           
+"Abandono De La Querella"\                           
+"Declara Inadmisibilidad De La Querella."\  
+
+Cada registro lleva asociado su Competencia y su Informe.
+
+Competencia:
+
+"Sin_Competencia"\ 
+"Garantia" 
+
+Informe:
+
+"Terminos Por Rol"
+
+Sedes judiciales:
+
+"Juzgado De Garantia De Tocopilla"\       
+"Juzgado De Letras Y Garantia De Maria Elena"\
+"Tribunal De Juicio Oral En Lo Penal De Calama"\
+"Juzgado De Letras Y Garantia De Mejillones"\
+"Juzgado De Letras Y Garantia De Taltal"\
+
+```{r 11,  echo = FALSE}
+abc <- tabla_7[c(1:100),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+### tabla 8 
+
+En el poder judicial de Chile existen 34 Secretarías asociadas sólo a una Corte de Apelaciones -en éste caso la de Antofagasta-, que también se asocian a una sola competencia: **"Sin_Competencia"** y a un solo informe: **"Ingresos Corte"**
+
+La tabla 8 informa de los registros asociados a cada secretaría mensualmente a los largo de los 5 años con la frecuencia de sus ingresos.
+
+Las Secretarías de la Corte de Apelaciones de Antofagasta son:
+
+"Reforma Procesal Penal"\            
+"Cobranza"\                          
+"Policía Local"\                     
+"Familia"\                           
+"Reforma Laboral"\                   
+"Tributario Y Aduanero"\             
+"Civil"\                             
+"Pleno"\                             
+"Protección"\                        
+"Crimen"\                            
+"Quejas Y Hechos"\                   
+"Protección-Ant"\                    
+"Reforma Procesal Penal-Ant"\        
+"Reforma Laboral-Ant"\               
+"Civil-Ant"\                         
+"Familia-Ant"\                       
+"Tributario Y Aduanero-Ant"\         
+"Quejas Y Hechos-Ant"\               
+"Cobranza-Ant"\                      
+"Policía Local-Ant"\                 
+"Ministro 1° Instancia-Ant"\         
+"Crimen-Ant"\                        
+"Pleno Y Otros Adm"\                 
+"Administrativo-Ant"\                
+"Ministro 1° Instancia"\             
+"Laboral - Cobranza"\                
+"Policia Local"\                     
+"Exhorto"\                           
+"Contencioso Administrativo"\        
+"Penal"\                             
+"Amparo"\                            
+"Ley De Navegación"\                 
+"Ambiental"\                         
+"Ministro Primera Instancia Y Fuero"\
+
+```{r 12,  echo = FALSE}
+abc <- tabla_8[c(1:100),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+
+### tabla 9 
+
+La tabla 9 informa de los años en los que ingresó una causa y la cantidad que todavía quedan pendientes, a nivel del año y mes correspondiente. Es quizás una de las tablas más difíciles de leer.
+
+```{r 13,  echo = FALSE}
+abc <- tabla_9[c(1:100),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+
+### tabla 10 -Sala-Total-Corte-Tribunal-Competencia-Informe-Año-Mes
+
+En el poder judicial de Chile existen 10 Salas asociadas sólo a una Corte de Apelaciones -en éste caso la de Antofagasta-, que también se asocian a una sola competencia: **"Sin_Competencia"** y a un solo informe: **"Términos Corte"**
+
+La tabla 10 informa en el transcurso del tiempo de la frecuencia de causas que llevan .
+
+Las Salas de la Corte de Apelaciones de Antofagasta son:
+
+"Tercera"\           
+"Pleno"\            
+"Presidencia"\       
+"Secretaria"\        
+"Ministro"\         
+"Cuenta 1° Sala"\    
+"Primera"\           
+"Segunda"\          
+"Presidencia Pleno"\ 
+"Com. Lib. Cond."\ 
+
+Competencia\
+"Sin_Competencia"
+
+Informe:\
+"Términos Corte"
+
+```{r 15,  echo = FALSE}
+abc <- tabla_10[c(1:100),]
+
+datatable(abc, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+Calculemos la cantidad de registros de cada tabla:
+
+```{r 16,  echo = FALSE}
+nrow(tabla_1)
+nrow(tabla_2)
+nrow(tabla_3)
+nrow(tabla_4)
+nrow(tabla_5)
+nrow(tabla_6)
+nrow(tabla_7)
+nrow(tabla_8)
+nrow(tabla_9)
+nrow(tabla_10)
+```
+
+## Generamos los xlsx 
+
+
+```{r 17, echo = FALSE}
+write_xlsx(tabla_1,"tablas de la CdeAdeAntofagasta/tabla_1.xlsx")
+write_xlsx(tabla_2,"tablas de la CdeAdeAntofagasta/tabla_2.xlsx")
+write_xlsx(tabla_3,"tablas de la CdeAdeAntofagasta/tabla_3.xlsx")
+write_xlsx(tabla_4,"tablas de la CdeAdeAntofagasta/tabla_4.xlsx")
+write_xlsx(tabla_5,"tablas de la CdeAdeAntofagasta/tabla_5.xlsx")
+write_xlsx(tabla_6,"tablas de la CdeAdeAntofagasta/tabla_6.xlsx")
+write_xlsx(tabla_7,"tablas de la CdeAdeAntofagasta/tabla_7.xlsx")
+write_xlsx(tabla_8,"tablas de la CdeAdeAntofagasta/tabla_8.xlsx")
+write_xlsx(tabla_9,"tablas de la CdeAdeAntofagasta/tabla_9.xlsx") 
+write_xlsx(tabla_10,"tablas de la CdeAdeAntofagasta/tabla_10.xlsx") 
+```
+
+# Parte II: Aplicación de un muestreo aleatorio simple (MAS) a las tablas unidas.
+
+Se extrae con una función de generación de números aleatorios 10 numeros que se comparan manualmente con el registro correspondiente en https://www.pjud.cl.
+
+## MAS a la tabla 1
+
+Hacemos un MAS generando 10 números aleatorios entre 1 y 44562
+
+```{r 18, echo = FALSE}
+nrow(tabla_1)
+```
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r 19, echo = FALSE}
+set.seed(546)
+aleatorios <- sample(1:44562, 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in aleatorios){
+   resultado <- tabla_1[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+## MAS a la tabla 2
+
+Hacemos un MAS generando 10 números aleatorios entre 1 y 49836 
+
+```{r 20, echo = FALSE}
+nrow(tabla_2)
+```
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r 21, echo = FALSE}
+set.seed(351)
+aleatorios <- sample(1:49836 , 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in aleatorios){
+   resultado <- tabla_2[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+## MAS a la tabla 3
+
+Hacemos un MAS generando 10 números aleatorios entre 1 y  14640
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r 23, echo = FALSE}
+set.seed(888)
+aleatorios <- sample(1:14640 , 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in aleatorios){
+   resultado <- tabla_3[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+## MAS a la tabla 4
+
+Hacemos un MAS generando 10 números aleatorios entre 1 y 11873
+
+el seed lo hacemos variar entre 1 y 1000
+
+
+```{r 24, echo = FALSE}
+nrow(tabla_4)
+```
+
+```{r 25, echo = FALSE}
+set.seed(3)
+aleatorios <- sample(1:11873 , 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in aleatorios){
+   resultado <- tabla_4[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+
+## MAS a la tabla 5
+
+Hacemos un MAS generando 10 números aleatorios entre 1 y 5268
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r 266, echo = FALSE}
+nrow(tabla_5)
+```
+
+
+```{r 27, echo = FALSE}
+set.seed(67)
+aleatorios <- sample(1:5268 , 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in aleatorios){
+   resultado <- tabla_5[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+
+## MAS a la tabla 6
+
+Hacemos un MAS generando 10 números aleatorios entre  1 y 481
+
+el seed lo hacemos variar entre 1 y 1000
+
+
+```{r 277, echo = FALSE}
+nrow(tabla_6)
+```
+
+```{r 28, echo = FALSE}
+set.seed(136)
+aleatorios <- sample(1:nrow(tabla_6), 10, replace=TRUE)
+receptaculo <- data.frame()
+
+for(i in aleatorios){
+   resultado <- tabla_6[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+## MAS a la tabla 7
+
+Hacemos un MAS generando 10 números aleatorios entre  1 y 1501
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r 288, echo = FALSE}
+nrow(tabla_7)
+```
+
+
+
+```{r 29, echo = FALSE}
+set.seed(876)
+aleatorios <- sample(1:nrow(tabla_7), 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in sort(aleatorios)){
+   resultado <- tabla_7[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+## MAS a la tabla 8
+
+Hacemos un MAS generando 10 números aleatorios entre  1 y 633
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r 299, echo = FALSE}
+nrow(tabla_8)
+```
+
+
+```{r 30, echo = FALSE}
+set.seed(234)
+aleatorios <- sample(1:nrow(tabla_8), 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in sort(aleatorios)){
+   resultado <- tabla_8[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+ 
+## MAS a la tabla 9
+
+Hacemos un MAS generando 10 números aleatorios entre 1 y 204 
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r 300, echo = FALSE}
+nrow(tabla_9)
+```
+
+
+```{r 31, echo = FALSE}
+set.seed(546)
+aleatorios <- sample(1:nrow(tabla_9), 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in sort(aleatorios)){
+   resultado <- tabla_9[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+## MAS a la tabla 10
+
+Hacemos un MAS generando 10 números aleatorios entre 1 y 366
+
+el seed lo hacemos variar entre 1 y 1000
+
+```{r 310, echo = FALSE}
+nrow(tabla_10)
+```
+
+```{r 32, echo = FALSE}
+set.seed(289)
+aleatorios <- sample(1:nrow(tabla_10), 10, replace=TRUE)
+
+receptaculo <- data.frame()
+
+for(i in sort(aleatorios)){
+   resultado <- tabla_10[i,]
+   receptaculo <- rbind(receptaculo,resultado)
+}
+datatable(receptaculo, extensions = 'Buttons', escape = FALSE, rownames = TRUE,
+          options = list(dom = 'Bfrtip',
+          buttons = list('colvis', list(extend = 'collection',
+          buttons = list(
+          list(extend='copy'),
+          list(extend='excel',
+            filename = 'tabla'),
+          list(extend='pdf',
+            filename= 'tabla')),
+          text = 'Download')), scrollX = TRUE))
+```
+
+
+Se compara el muestreo con la data extrayéndola en forma manual de https://www.pjud.cl coincidiendo el 100%.
+
+Se supone que una corte admite todas las pobibles variables y variaciones que pueda poseer la descarga de la data de una específica, por lo que no se harán más muestreos. Se unirán por corte generándose sólo 10 tablas y en una segunda instancia sólo una. 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+
+
+
