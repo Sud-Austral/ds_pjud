@@ -1,2 +1,24 @@
-es la data correcta para la Corte de Apelaciones de Arica, fue Arica2, pues a la
-primera version le faltaba un año
+
+```{r}
+tabla_1_unida <- read.csv("C:/Users/chris/Desktop/GitHub/ds_pjud/tablas unidas 10/tabla_1.csv")
+tabla_2_unida <- read.csv("C:/Users/chris/Desktop/GitHub/ds_pjud/tablas unidas 10/tabla_2.csv")
+```
+
+```{r}
+nrow(tabla_1_unida)/2
+```
+
+```{r}
+nrow(tabla_2_unida)/2 + .5
+```
+
+```{r}
+writexl::write_xlsx(tabla_1_unida[1:as.numeric(nrow(tabla_1_unida)/2),], "C:/Users/chris/Desktop/GitHub/ds_pjud/tablas unidas 10/tabla_1_primera_parte.xlsx")
+writexl::write_xlsx(tabla_1_unida[as.numeric(nrow(tabla_1_unida)/2 + 1) :as.numeric(nrow(tabla_1_unida)),], "C:/Users/chris/Desktop/GitHub/ds_pjud/tablas unidas 10/tabla_1_segunda_parte.xlsx")
+```
+
+```{r}
+writexl::write_xlsx(tabla_2_unida[1:as.numeric(nrow(tabla_2_unida)/2 + .5),], "C:/Users/chris/Desktop/GitHub/ds_pjud/tablas unidas 10/tabla_2_primera_parte.xlsx")
+writexl::write_xlsx(tabla_2_unida[as.numeric(nrow(tabla_2_unida)/2 + .5 + 1) :as.numeric(nrow(tabla_2_unida)),], "C:/Users/chris/Desktop/GitHub/ds_pjud/tablas unidas 10/tabla_2_segunda_parte.xlsx")
+```
+
