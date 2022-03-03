@@ -1,7 +1,10 @@
 # Data extraída de la página oficial del Poder Judicial de Chile
 
-Tabla 1 primera parte:
-Tabla 1 segunda parte:
+Tabla 1 primera parte:\
+
+
+Tabla 1 segunda parte:\
+
 
 
 
