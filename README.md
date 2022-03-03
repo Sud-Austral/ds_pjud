@@ -72,7 +72,7 @@ Tenemos en ésta tabla 12 Cortes de Apelaciones que van desde la de Antofagasta 
 
 Elijamos una Corte: **Corte de Apelaciones de San Miguel** 
 
-En el campo **tribunal** obtenemos un listado de todos los tribunales (que son los estadios juridiccionales propiamente dichos, los que dictan sentencias), asociados a la **Corte de Apelaciones** respectiva).
+En el campo **tribunal** obtenemos un listado de todos los tribunales (que son los estadios juridiccionales propiamente dichos, los que dictan sentencias), asociados a la **Corte de Apelaciones** respectiva.
 
 Vemos que son de 5 tipos:
 
