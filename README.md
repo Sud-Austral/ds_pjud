@@ -12,6 +12,9 @@ Toda ésta data se agrupa en 10 tablas cuyas dos primeras están divididas en do
 
 Están en la carpeta ds_pjud/tablas unidas 10/
 
+***
+***
+
 **Tabla 1 primera parte**:
 
 La tabla tiene los siguientes campos:
