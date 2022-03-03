@@ -55,8 +55,6 @@ Tribunal de Juicio Oral En Lo Penal: Delitos gravísimos de sangre o delitos de 
 
 Juzgado de Letras del Trabajo: Conflictos de cuello blanco que resuelven conflictos empleado-empleador, etc.
 
-![imagen](https://user-images.githubusercontent.com/50757247/156595739-5bc94762-f5ec-43eb-b0fe-a465f6bdd739.png)
-
 Juzgado de Cobranza laboral y previsional: Juicios que particulares emprenden contra empresas para cobrar deudas pendientes, etc.
 ![imagen](https://user-images.githubusercontent.com/50757247/156596134-17abc70c-6529-4c61-aa05-e3165c7b02fa.png)
 
