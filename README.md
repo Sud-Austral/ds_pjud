@@ -42,7 +42,7 @@ Vamos a establecer pasos como guía para poder ir extrayendo la información seg
 
 ***
 
-1. Primer paso
+1. Primer paso 
 
 ¿Cuántas **Cortes** tenemos a nuestra disposición?
 
