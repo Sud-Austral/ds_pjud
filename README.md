@@ -44,7 +44,7 @@ Vamos a establecer pasos como guía para poder ir extrayendo la información seg
 
 1. Primer paso
 
-¿Cuántas **Cortes** tenemos a nuestra disposición **Corte**?
+¿Cuántas **Cortes** tenemos a nuestra disposición?
 
 Para ello hacemos un filtro en el campo **Corte**: 
 
