@@ -36,6 +36,10 @@ En qué corte estamos?
 
 Tenemos en ésta tabla 12 Cortes de Apelaciones que van desde Antofagasta a San Miguel.
 
+2. Segundo paso
+
+Elijamos una Corte: **Corte de Apelaciones de San Miguel** 
+
 ***
 
 Tabla 1 segunda parte:
