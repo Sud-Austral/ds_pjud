@@ -60,7 +60,7 @@ Corte De Apelaciones De La Serena\
 Corte De Apelaciones De Puerto Montt\
 Corte De Apelaciones De Punta Arenas\
 Corte De Apelaciones De Rancagua\
-Corte De Apelaciones De San Miguel\
+Corte De Apelaciones De San Miguel
 
 ![imagen](https://user-images.githubusercontent.com/50757247/156581224-a96dd67e-8261-4431-9c0e-cb2c30e35ca5.png)
 
