@@ -596,7 +596,7 @@ Tenemos en ésta tabla 6 Cortes de Apelaciones que van desde San Miguel a la de 
 
 2. Segundo paso
 
-Elijamos una Corte: **Corte de Apelaciones de San Miguel** (que es la continuación)
+Elijamos una Corte: **Corte de Apelaciones de San Miguel**
 
 y es lo mismo que la **Tabla 1 primera parte** pues es la continuación.
 
