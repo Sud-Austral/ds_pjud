@@ -598,8 +598,6 @@ Tenemos en ésta tabla 6 Cortes de Apelaciones que van desde San Miguel a la de 
 
 Elijamos una Corte: **Corte de Apelaciones de San Miguel** (que es la continuación)
 
-En el campo **tribunal** obtenemos un listado de todos los tribunales (que son los estadios juridiccionales propiamente dichos, los que dictan sentencias), asociados a la **Corte de Apelaciones** respectiva).
-
 y es lo mismo que la **Tabla 1 primera parte** pues es la continuación.
 
 
