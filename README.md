@@ -36,7 +36,7 @@ El segundo (**total**), es el relevante, pues nos entrega las frecuencias según
 infracción a la norma por crimen, delito, falta o disputa, por área juridiccional, que se asocia a los campos **Corte** y **Tribunal**. 
 
 **Competencia** es un campo que sólo aparece en los **Juzgados de letras del trabajo**
-y comprende dos categorías: Cobranza y Laboral.
+y comprende dos categorías: **Cobranza** y **Laboral**.
 
 Vamos a establecer pasos como guía para poder ir extrayendo la información según nuestras necesidades:
 
