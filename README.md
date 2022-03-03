@@ -48,21 +48,19 @@ Vamos a establecer pasos como guía para poder ir extrayendo la información seg
 
 Para ello hacemos un filtro en el campo **Corte**: 
 
-**Corte**
-Corte De Apelaciones De Antofagasta
-Corte De Apelaciones De Arica
-Corte De Apelaciones De Chillan
-Corte De Apelaciones De Concepcion
-Corte De Apelaciones De Copiapo
-Corte De Apelaciones De Coyhaique
-Corte De Apelaciones De Iquique
-Corte De Apelaciones De La Serena
-Corte De Apelaciones De Puerto Montt
-Corte De Apelaciones De Punta Arenas
-Corte De Apelaciones De Rancagua
-Corte De Apelaciones De San Miguel
-![imagen](https://user-images.githubusercontent.com/50757247/156656160-1cfad250-3ef2-4fb7-b4f7-fa25c2dae87f.png)
-
+**Corte**\
+Corte De Apelaciones De Antofagasta\
+Corte De Apelaciones De Arica\
+Corte De Apelaciones De Chillan\
+Corte De Apelaciones De Concepcion\
+Corte De Apelaciones De Copiapo\
+Corte De Apelaciones De Coyhaique\
+Corte De Apelaciones De Iquique\
+Corte De Apelaciones De La Serena\
+Corte De Apelaciones De Puerto Montt\
+Corte De Apelaciones De Punta Arenas\
+Corte De Apelaciones De Rancagua\
+Corte De Apelaciones De San Miguel\
 
 ![imagen](https://user-images.githubusercontent.com/50757247/156581224-a96dd67e-8261-4431-9c0e-cb2c30e35ca5.png)
 
