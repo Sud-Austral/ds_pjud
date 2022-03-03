@@ -1,4 +1,6 @@
-# Data extraída de la página oficial del Poder Judicial de Chile
+# Cómo leer la data descargada del Poder Judicial.
+
+## Introducción
 
 Tabla 1 primera parte:
 
