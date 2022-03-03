@@ -17,15 +17,14 @@ que se asocia a los campos **Corte** y **Tribunal**.
 
 Entonces, los campos son:
 
-Materia	
-Total	
-
+Materia\
+Total\
 Corte\
 Tribunal\
-Competencia\	
-Informe\	
-Año\	
-Mes\
+Competencia\
+Informe\
+Año\
+Mes
 
 ![imagen](https://user-images.githubusercontent.com/50757247/156581224-a96dd67e-8261-4431-9c0e-cb2c30e35ca5.png)
 
