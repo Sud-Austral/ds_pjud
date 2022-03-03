@@ -42,6 +42,17 @@ Vamos a establecer pasos como guía para poder ir extrayendo la información seg
 
 En qué **Corte** estamos? Para ello hacemos un filtro en el campo **Corte**: 
 
+Corte\
+Corte De Apelaciones De San Miguel\
+Corte De Apelaciones De Santiago\
+Corte De Apelaciones De Talca\
+Corte De Apelaciones De Temuco\
+Corte De Apelaciones De Valdivia\
+Corte De Apelaciones De Valparaiso\
+
+![imagen](https://user-images.githubusercontent.com/50757247/156651980-1a40eaa9-772e-42da-a1f8-c7ff727e2168.png)
+
+
 ![imagen](https://user-images.githubusercontent.com/50757247/156581224-a96dd67e-8261-4431-9c0e-cb2c30e35ca5.png)
 
 Tenemos en ésta tabla 12 Cortes de Apelaciones que van desde la de Antofagasta a la de San Miguel.
