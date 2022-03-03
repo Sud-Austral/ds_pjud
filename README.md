@@ -7,16 +7,15 @@ La tabla tiene campos:
 Materia	
 Total	
 
-Corte	
-Tribunal	
-Competencia	
-Informe	
-Año	
-Mes
-
-![imagen](https://user-images.githubusercontent.com/50757247/156578271-5201c91a-2283-4090-9447-d587aa0c91c1.png)
+Corte\	
+Tribunal\
+Competencia\	
+Informe\	
+Año\	
+Mes\
 
 
+***
 
 Tabla 1 segunda parte:
 
