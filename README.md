@@ -25,11 +25,11 @@ Informe\
 Año\
 Mes
 
-, el segundo (**total**) es el relevante, pues da las frecuencias según tipo de
+El segundo (**total**) es el relevante, pues da las frecuencias según tipo de
 infracción a la norma según categoría (ésto reviste cierto grado de complejidad para su comprensión) y área juridiccional, que se asocia a los campos **Corte** y **Tribunal**. 
 
 **Competencia** es un campo que sólo aparece en los Juzgados de letras del trabajo
-y comprende dos categorías: Cobranza y Laboral.
+y comprende dos categorías (competencias): Cobranza y Laboral.
 
 Vamos a establecer pasos como guía para poder yendo extrayendo la información según nuestras necesidades:
 
@@ -45,7 +45,7 @@ Tenemos en ésta tabla 12 Cortes de Apelaciones que van desde la de Antofagasta 
 
 Elijamos una Corte: **Corte de Apelaciones de San Miguel** 
 
-Obtenemos un listado de todos los tribunales (que son los estadios juridiccionales propiamente dichos, que dictan sentencias)
+Obtenemos un listado de todos los tribunales (que son los estadios juridiccionales propiamente dichos, que dictan sentencias.)
 
 Vemos que son de 6 tipos:
 
