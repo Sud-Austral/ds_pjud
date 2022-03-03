@@ -378,3 +378,182 @@ En el campo Informe tenemos dos categorías:
 |Violacion De Secretos.|
 
 **Sentencias Por Delito**, cuyas categorías de materias asociadas son:
+
+|Infracción normativa|
+| ---      | 
+|Abandono O Maltrato Animal Art.291 Bis.|
+|Abuso Sexual Con Contacto De Menor De 14 Años. Art. 366 Bis|
+|Abuso Sexual De 14 Años A Menor De 18 Años Con Circunstancia|
+|Abuso Sexual De Mayor De 14 (Con Circunstancias De Violación|
+|Abuso Sexual De Menor De 14 Años (Con Contacto Corporal).|
+|Abuso Sexual Impropio Mayor De 14 Años Y Menor 18 Años|
+|Abuso Sexual Impropio Menor De 14 Años|
+|Abuso Sexual Mayor14 /Sorpresa Sin Consemtim Art.366 Inc 3|
+|Abuso Sexual Sin Contacto Art. 366 Quáter Inc. 1° Y 2|
+|Adquisicion O Almacenamiento Material Pornografico Infantil.|
+|Allanamientos Irregulares.|
+|Amenaza A Gendarme En El Desempeño De Sus Funciones.|
+|Amenaza Con Arma (Falta) Art. 494 Nº 4 Codigo Penal.|
+|Amenazas Condic.c/Personas Y Propiedades Art.296 1Y2,Art.297|
+|Amenazas Simples Contra Personas Y Propiedades Art. 296 Nº3.|
+|Amenazasa Carabineros (Art. 417 Cód. J.militar).|
+|Apremios Ilegítimos Cometidos Por Empleados Públicos.|
+|Apropiacion Indebida Art.470 N°1|
+|Arrojamiento De Piedras U Otros Objetos (496 Nr26 Codigo Pen|
+|Asociaciones Ilicitas.|
+|Atentado Contra Jefe De Estado O Autoridad Publica.|
+|Atentados Y Amenazas Contra La Autoridad. Art. 261Nº 1Y.|
+|Calumnia (Accion Privada).|
+|Cohecho Cometido Por Empleado Público.art.248,248 Bis Y 249.|
+|Cohecho O Soborno Cometido Por Particular. Art. 250|
+|Cohecho.|
+|Comercio Clandestino .|
+|Conduc Bajo La Inf. Del Alcohol Art 193 Inc. 2 Ley De Trans|
+|Conduc. Bajo Influen Del Alcohol Con O Sin Daños O Les.leves|
+|Conduc. Ebriedad Resul.lesiones Grave.art 196 Inc.2Ley.trans|
+|Conduc. Estado De Ebriedad Con O Sin Daños O Lesiones Leves|
+|Conduc.bajo Influen Del Alcohol Con O Sin Daños O Les.leves.|
+|Conduc.ebriedad Resul.lesiones Grave.art 196 Inc.2Ley.trans.|
+|Conduc.ebriedad Resul.lesiones Menos Grave.a196 I.2Ley.trans|
+|Conduc.ebriedad Resul.muerte Art.196 Inc.3Ley.transito.|
+|Conduc.ebriedad Susp.lic. Art.196Y209 Inc.2 Ley.transito.|
+|Conduc.estado De Ebriedad Con O Sin Daños O Lesiones Leves.|
+|Conduc.estado De Ebriedad Con Resultado De Daños.art. 19.|
+|Conduc.estado Ebriedad C/Result.lesiones Graves O Menos Gra.|
+|Conduc.estado Ebriedad C/Result.muerte O Lesion Graves Grav.|
+|Conduc.sin La Licencia Debida Art 194 Ley De Transito.|
+|Conduc.vehic Durante Vig Alg.sanci Impuest Art209 Ley 18290.|
+|Conduccion Bajo La Influencia Del Alcohol Causando Lesiones.|
+|Conduccion Ebriedad Susp.lic. Art.196Y209 Inc.2 Ley.transito|
+|Conduccion Estado De Ebriedad Con Resultado De Daños.art. 19|
+|Conduccion Estado De Ebriedad Con Resultado De Daños.art. 19|
+|Conduccion Sin La Licencia Debida Art 194 Ley De Transito.|
+|Connivencia En La Fuga Y Evasión Culpable De Detenidos|
+|Consumo/Porte De Drogas En Lugares Calificados (Art. 51).|
+|Consumo/Porte En Lug.pub.o Priv.c/Previo Concierto(Art.50).|
+|Contra Salud Publica. Arts. 313 A Y 313 B|
+|Contra Salud Pública. Arts. 313 D Al 315 Y Art. 317.|
+|Contra Salud Publica. Arts. 313 D Al 318.|
+|Contrab. Infrac A La Ord. De Aduan Art 168. Ley 20.780|
+|Cuasidelito De Homicidio.|
+|Cuasidelito De Lesiones: Art 490, 491 Inc 2° Y 492.|
+|Cuasidelito Vehiculo Motorizado Ley Transito|
+|Cultivo/Cosecha Espec.vegetales Productoras Estupef.(Art.8.|
+|Daño Falta (495 Nr 21 Codigo Penal).|
+|Daños Simples.|
+|Declarac. Maliciosa Impuesto Art.97 Nº4.Except Inc.3 C.trib|
+|Delito Desordenes Publicos Art. 269 (No Falta Del Codigo 130|
+|Delitos Contenidos En Leyes De Prenda Especiales Ley 20.190.|
+|Delitos Contra La Vida Y La Privacidad De Las Conversaciones|
+|Delitos Marcarios.|
+|Delitos Que Contempla El Codigo Tributario.|
+|Desacato (Art. 240 Codigo De Procedimiento Civil).|
+|Detencion, Destierro O Arresto Irregular Art. 148|
+|Disparos Injustif Vía Pública (Art. 14 D Inc. Final)|
+|Ejercicio Ilegal De La Profesión.art. 213. Inc. 1º.|
+|Espionaje Informatico Art. 2 Y 4 Ley 19223.|
+|Estafas Y Otras Defraudaciones Contra Particulares|
+|Estupro.|
+|Fabricación, Acopio O Comercialización De Hilo Curado.|
+|Falsificación De Billetes Art. 64 Ley Orgánica Banco Central|
+|Falsificacion De Obras Protegidas Por Ley De Propiedad Intel|
+|Falsificacion Licencia De Conducir Y Otras Falsificaciones.|
+|Falsificacion O Uso Malicioso De Documentos Privados.|
+|Falsificacion O Uso Maliciosos De Documentos Publicos.|
+|Falta De Respeto A Autoridad Pública (495 Nº 4 Código Penal)|
+|Femicidio Intimo Art. 390 Bis|
+|Fingimiento De Cargos O Profesiones .Art. 213 Inc. 2.|
+|Giro Dol Cheq (Fal Fond) Ac. Penal Priv. Art. 22. Dfl 707|
+|Giro Dol Cheq. (Cuent Cerr) Ac. Penal Priv Art. 22. Dfl 707|
+|Giro Doloso De Cheques (Sólo Crimen)|
+|Giro Doloso De Cheques Ac. Penal Püblica Art. 42. Dfl 707|
+|Homicidio En Riña O Pelea.|
+|Homicidio.|
+|Hurto Agravado (Art. 447 Codigo Penal).|
+|Hurto De Bienes Pertenecientes A Redes De Suministro Publico|
+|Hurto Falta (494 Bis Codigo Penal).|
+|Hurto Simple Por Un Valor De 4 A 40 Utm.|
+|Hurto Simple Por Un Valor De Media A Menos De 4 Utm.|
+|Hurto Simple Por Un Valor Sobre 40 Utm.|
+|Incendio C/Peligro Para Las Personas Arts.475 Y 476 N01 Y 2|
+|Incendio Solo C/Daños O Sin Peligro Propagacion.art.477,478.|
+|Infringir Normas Higiénicas Y De Salubridad|
+|Injuria (Accion Privada).|
+|Injurias Y Calumnias Por Medios De Comunicacion Social.|
+|Lanzar Obj A Vía Púb Con Muerte O Lesiones (Ley 21208 Inc 2)|
+|Lavado De Dinero Persona Juridica Art. 27 Ley 19.913|
+|Lavado De Dinero Persona Natural Art. 27 Ley 19.913|
+|Lesiones Graves Gravisimas. Art. 397 Nº 1.|
+|Lesiones Graves.|
+|Lesiones Leves 494 N°5 Código Penal|
+|Lesiones Leves.|
+|Lesiones Menos Graves.|
+|Maltrato Corp. Menor. O Personas Vul. Art. 403 Bis Inc. 1°.|
+|Maltrato De Obra A Gendarme En El Desempeño De Sus Funciones|
+|Maltrato De Obra Personal Investigaciones Con O Sin Lesiones|
+|Maltrato Habitual(Violencia Intrafamiliar) (Art. 14).|
+|Maltrato Obra A Carabineros Art. 416 Bis Codigo Just.militar|
+|Malversacion De Caudales Publicos.|
+|Negativa A Efectuarse Examen. Art. 195 Bis Ley De Transito|
+|Negativa A Efectuarse Examen. Art. 195 Ley De Transito|
+|No Dar Cuenta De Accidente De Transitoart. 195Ley De Tra.|
+|Obtención De Servicios Sexuales De Menores.|
+|Ocult Ident En Control Prevent Art 496 N: 5 Y 12 Ley 20931|
+|Ocultacion De Ident En Control Invest Art 496 N05 Art 85 Cpp|
+|Ocultacion De Identidad (496 Nr 5 Codigo Penal).|
+|Ocultamiento De Placa Patente (Art. 192 Letra E)|
+|Ofensas Al Pudor (495 Nr 5 Codigo Penal).|
+|Otras Faltas Codigo Penal.|
+|Otras Infracciones Al Csdigo De Justicia Militar.|
+|Otros Delitos Contra La Ley De Propiedad Intelectual.|
+|Otros Delitos Contra La Ley Del Transito.|
+|Otros Delitos Contra La Propiedad|
+|Otros Delitos De La Ley 20.000.|
+|Otros Delitos De La Ley De Control De Armas (Ley 17.798)|
+|Otros Delitos L.o.c. De Investigaciones.|
+|Otros Delitos Ley De Cuentas Corrientes Bancarias Y Cheque.|
+|Otros Hechos Que No Constituyan Delito: Agrup.1008,1009,1011|
+|Portar Elemento Conocidamente Destinados Cometer Delito Robo|
+|Porte De Arma Cortante O Punzante (288 Bis).|
+|Porte De Arma Prohibida (Art. 14 Inc. 1°)|
+|Porte Ilegal De Arma De Fuego, Municiones Y Otros Sujetas A.|
+|Posesión O Tenencia De Armas Prohibidas|
+|Posesión Tenencia O Porte De Mun Y Sust Químicas|
+|Posesión, Tenencia O Porte De Armas Sujetas A Control|
+|Produccion Material Pornografico Utilizando Menores 18 Años.|
+|Promover O Facilitar Prostitucion De Menores.|
+|Receptación De Vehículos Motorizados|
+|Receptacion. Art. 456 Bis A.|
+|Robo Con Fuerza De Cajeros Automaticos|
+|Robo Con Intimidacion.|
+|Robo Con Violencia, Intimidación De Vehículo Motorizado|
+|Robo Con Violencia.|
+|Robo Con Violencia. Art.436 Inc. 1º 433, 438, 439.|
+|Robo De Vehiculo Motorizado.|
+|Robo En Bienes Nacionales De Uso Publico O Sitiosno Destin.|
+|Robo En Lugar Habitado O Destinado A La Habitacion.|
+|Robo En Lugar No Habitado.|
+|Robo Por Sorpresa.|
+|Secuestro|
+|Soborno.art. 250. Persona Natural|
+|Torturas Cometidas P/Funcionarios Pzbl.(Art. 150, A Inc 10)|
+|Trafico De Migrantes 411 Bis Inciso 1, 2 Y 3|
+|Trafico De Pequeñas Cantidades (Art. 4).|
+|Trafico Ilícito De Drogas (Art. 3).|
+|Ultraje Publico A Las Buenas Costumbres.|
+|Uso Fraudulento De Tarjetas De Crédito Y Débito.|
+|Uso Fraudulento De Tarjetas O Medios De Pago. Ley 20.009|
+|Usura.|
+|Usurpacion De Nombre.|
+|Usurpacion No Violenta (Art. 458 Codigo Penal).|
+|Venta Ilicita De Obras Protegidas Por Ley De Propiedad Intel|
+|Violacion|
+|Violación De Mayor De 14 Años.|
+|Violacion De Menor De 14 Años.|
+|Violacion De Morada.|
+
+
+
+
+
+
