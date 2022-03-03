@@ -31,7 +31,7 @@ Vamos a establecer pasos como guía para poder yendo extrayendo la información 
 
 1. Primer paso
 
-En qué corte estamos? Para ellos hacemos un filtro 
+En qué **Corte** estamos? Para ellos hacemos un filtro 
 
 ![imagen](https://user-images.githubusercontent.com/50757247/156581224-a96dd67e-8261-4431-9c0e-cb2c30e35ca5.png)
 
