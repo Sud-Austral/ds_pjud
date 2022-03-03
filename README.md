@@ -13,7 +13,8 @@ divididas las dos primeras en dos.
 
 La tabla tiene los siguientes campos, el segundo (**total**) el relevante, pues da las frecuencias según tipo de
 infracción a la norma según categoría (ésto reviste cierto grado de complejidad para su comprensión) y área juridiccional, 
-que se asocia a los campos **Corte** y **Tribunal**.
+que se asocia a los campos **Corte** y **Tribunal**. **Competencia** es un campo que sólo aparece en los Juzgados de letras del trabajo
+que comprende dos categorías: Cobranza y Laboral.
 
 Entonces, los campos son:
 
