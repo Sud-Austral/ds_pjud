@@ -40,6 +40,9 @@ Tenemos en ésta tabla 12 Cortes de Apelaciones que van desde Antofagasta a San 
 
 Elijamos una Corte: **Corte de Apelaciones de San Miguel** 
 
+![imagen](https://user-images.githubusercontent.com/50757247/156592230-8d350065-a164-4228-a6e6-0901ad1f9dba.png)
+
+
 ***
 
 Tabla 1 segunda parte:
