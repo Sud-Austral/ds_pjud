@@ -397,7 +397,6 @@ En el campo Informe tenemos dos categorías:
 |Violacion De Morada.|
 |Violacion De Secretos.|
 
-
 2.1.2 **Sentencias Por Delito**, cuyas categorías de materias (primer campo, la infracción normativa) asociadas son:
 
 |Infracción normativa|
@@ -574,7 +573,6 @@ En el campo Informe tenemos dos categorías:
 |Violacion De Morada.|
 
 ***
-***
 
 ## **Tabla 1: segunda parte**:
 
@@ -587,15 +585,14 @@ Vamos a establecer pasos como guía para poder ir extrayendo la información seg
 En qué **Corte** estamos? Para ello hacemos un filtro en el campo **Corte**: 
 
 **Corte**\
-Corte De Apelaciones De San Miguel\
-Corte De Apelaciones De Santiago\
-Corte De Apelaciones De Talca\
-Corte De Apelaciones De Temuco\
-Corte De Apelaciones De Valdivia\
-Corte De Apelaciones De Valparaiso
+1.1 Corte De Apelaciones De San Miguel\
+1.2 Corte De Apelaciones De Santiago\
+1.3 Corte De Apelaciones De Talca\
+1.4 Corte De Apelaciones De Temuco\
+1.5 Corte De Apelaciones De Valdivia\
+1.6 Corte De Apelaciones De Valparaiso
 
 ![imagen](https://user-images.githubusercontent.com/50757247/156650461-15f93bfe-862d-4812-a4e4-00d50c56d728.png)
-
 
 Tenemos en ésta tabla 12 Cortes de Apelaciones que van desde la de Antofagasta a la de San Miguel.
 
