@@ -6,6 +6,8 @@ Tenemos toda la información contenida en la página oficial del PJUD de Chile, 
 https://www.pjud.cl/post/estadisticas/
 entre Enero del 2017 y Diciembre del 2021.
 
+Agrupadas en 10 tablas divididas las dos primeras en dos.
+
 Tabla 1 primera parte:
 
 La tabla tiene campos: 
