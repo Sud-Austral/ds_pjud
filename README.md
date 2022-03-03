@@ -576,13 +576,9 @@ En el campo Informe tenemos dos categorías:
 
 ## **Tabla 1: segunda parte**:
 
-Vamos a establecer pasos como guía para poder ir extrayendo la información según nuestras necesidades:
-
-***
-
 1. Primer paso
 
-En qué **Corte** estamos? Para ello hacemos un filtro en el campo **Corte**: 
+Hacemos un filtro en el campo **Corte**: 
 
 **Corte**\
 1.1 Corte De Apelaciones De San Miguel\
@@ -594,16 +590,16 @@ En qué **Corte** estamos? Para ello hacemos un filtro en el campo **Corte**:
 
 ![imagen](https://user-images.githubusercontent.com/50757247/156650461-15f93bfe-862d-4812-a4e4-00d50c56d728.png)
 
-Tenemos en ésta tabla 12 Cortes de Apelaciones que van desde la de Antofagasta a la de San Miguel.
+Tenemos en ésta tabla 6 Cortes de Apelaciones que van desde San Miguel a la de Valparaíso.
 
 ***
 
 2. Segundo paso
 
-Elijamos una Corte: **Corte de Apelaciones de San Miguel** 
+Elijamos una Corte: **Corte de Apelaciones de San Miguel** (que es la continuación)
 
 En el campo **tribunal** obtenemos un listado de todos los tribunales (que son los estadios juridiccionales propiamente dichos, los que dictan sentencias), asociados a la **Corte de Apelaciones** respectiva).
 
-Vemos que son de 5 tipos:
+y es lo mismo que la **Tabla 1 primera parte** pues es la continuación.
 
 
