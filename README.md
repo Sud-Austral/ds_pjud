@@ -1,6 +1,6 @@
 # Cómo leer la data descargada del Poder Judicial.
 
-## Introducción
+# Introducción
 
 Tenemos **toda** la información contenida en la página oficial del PJUD de Chile, sección estadísticas, extraída de\
 https://www.pjud.cl/post/estadisticas/
@@ -19,7 +19,7 @@ Toda la data está en la carpeta ds_pjud/tablas unidas 10
 ```
 
 
-## **Tabla 1: primera parte**:
+# **Tabla 1: primera parte**:
 
 La **Tabla 1: primera parte** contiene 539400 registros agrupados en los siguientes campos:
 
@@ -35,8 +35,9 @@ La **Tabla 1: primera parte** contiene 539400 registros agrupados en los siguien
 El segundo (**total**), es el relevante, pues nos entrega las frecuencias según el tipo de
 infracción a la norma por crimen, delito, falta o disputa, por área juridiccional, que se asocia a los campos **Corte** y **Tribunal**. 
 
-**Competencia** es un campo que sólo aparece en los **Juzgados de letras del trabajo**
-y comprende dos categorías: **Cobranza** y **Laboral**.
+**Competencia** es un campo que sólo aparece en los **Juzgados de letras del trabajo** 
+y comprende dos categorías: **Cobranza** y **Laboral**. También aparece en las dos partes de
+la tabla 2, como veremos más adelante.
 
 Vamos a establecer pasos como guía para poder ir extrayendo la información según nuestras necesidades:
 
@@ -574,7 +575,7 @@ En el campo Informe tenemos dos categorías:
 
 ***
 
-## **Tabla 1: segunda parte**:
+# **Tabla 1: segunda parte**:
 
 1. Primer paso
 
@@ -602,7 +603,7 @@ y es lo mismo que la **Tabla 1 primera parte** pues es la continuación.
 
 ***
 
-## **Tabla 2: primera parte**:
+# **Tabla 2: primera parte**:
 
 ***
 
@@ -628,13 +629,120 @@ El tercero (**total**), es el relevante, pues nos entrega las frecuencias de tip
 
 ## Informe
 
-El campo **informe** contiene 3 categorías (excluyendo los 6 registros vacíos)
+El campo **informe** contiene 3 categorías (excluyendo 6 registros vacíos)
 
-1.1 Término de causas por materia y motivo
-1.2 Terminos (sic)
+1.1 Término de causas por materia y motivo de término\
+1.2 Terminos (sic)\
 1.3 Terminos Por Materia
 
-Cada uno asociado a:
+Cada uno asociado a una competencia que a su vez se asocia :
+
+1.1 Término de causas por materia y motivo de término
+
+1.1.1 Tipo.Término
+
+No Da Curso Demanda\
+No Presenta Demanda\
+Sentencias Definitiva\
+Tiene Pagado Credito\
+Avenimiento\
+Conciliaciones\
+Retiro Demanda\
+Cheque Notificacion Y No Pagado\
+Otros Terminos\
+Transacciones\
+Acumulacion En Tribunal\
+Abandona Procedimiento\
+Negativa Deuda\
+Remision_Imcompleta\
+Desestimiento Demanda\
+No Corresponde Ingreso\
+Negativa Firma\
+Excepciones Dilatorias\
+Cheque Notificacion Y Pagado\
+Pago Contribuciones
+
+1.1.2 Terminos
+
+Tipo.Término\
+Acumulación\
+Da Cuenta De Pago\
+Dictación De Sentencia\
+Retiro De La Demanda\
+No Da Curso A La Demanda\
+Desistimiento\
+Fallo De Excepciones Da Lugar\
+Incompetencia\
+Término De Ejecución\
+Abandono\
+Avenimiento\
+Caducidad, Declara\
+Conciliación\
+Allanamiento\
+Archivo Especial\
+Transacción\
+Acoge Demanda Monitorio\
+Acoge Corrección Del Procedimiento\
+Acepta Competencia\
+Devuélvase Cumplimiento\
+Fallo De Excepciones No Da Lugar\
+Dda. Anteriormente Presentada\
+Sentencia Con Pago Parcial\
+Rechaza Demanda Monitorio\
+Termino Med. Prejudicial\
+Prescripción, Acoge\
+Cobro De Costas Y Honorarios\
+Rechaza Competencia\
+Pago Ya Efectuado A Institución\
+Acepta Devolución\
+Rechaza Devolución (Contienda)\
+Acoge Contienda\
+Rechaza Contienda\
+Cúmplase Incompetencia Apelación\
+Sentencia Parcial\
+
+1.1.3 Terminos Por Materia
+
+Tipo.Término\
+Avenimiento\
+Incompetencia\
+Mediación\
+No Da Curso A La Demanda\
+No Da Curso A La Solicitud\
+Transacción\
+Conciliación\
+Desistimiento\
+Abandono Del Procedimiento\
+Retiro\
+Acoge Requerimiento (Monitorio).\
+Acumulación.\
+Aprobación No Inicio Investigación.\
+Certifica Cumplimiento Art. 468.\
+Comunica Y/O Aplica Decisión Ppio. De Oportunidad.\
+Declara Incompetencia.\
+Declara Sobreseimiento Definitivo.\
+No Perseverar En El Procedimiento.\
+Declara Incompetencia Rpa\
+Abandono De La Querella\
+Declara Inadmisibilidad De La Querella.\
+Audiencia De Sobreseimiento.\
+Declara Sobreseimiento Temporal.\
+Rechaza Sobreseimiento Definitivo.\
+Sobreseimiento.\
+Acumulación O Desacumulación.\
+Audiencia De Acumulación O Desacumulación.\
+Desacumulación.\
+Termina Por Incompetencia.\
+
+```diff
+- La tabla 2 considera el tipo de término de la causa 
+```
+
+
+
+
+
+
 
 
 
