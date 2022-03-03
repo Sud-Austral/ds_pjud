@@ -6,6 +6,8 @@ Tenemos toda la información contenida en la página oficial del PJUD de Chile, 
 https://www.pjud.cl/post/estadisticas/
 entre Enero del 2017 y Diciembre del 2021.
 
+En Chile existen 17 **Cortes de Apelaciones** que son los circuitos administrativos donde se organiza estructuralemente el poder judicial en  Chile.
+
 Agrupadas en 10 tablas, ubicadas en la carpeta ds_pjud/tablas unidas 10/
 divididas las dos primeras en dos.
 
