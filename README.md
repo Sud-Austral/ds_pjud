@@ -26,6 +26,8 @@ Informe\
 Año\
 Mes
 
+La forma de leer la tabla es elegir primero en qué corte estamos:
+
 ![imagen](https://user-images.githubusercontent.com/50757247/156581224-a96dd67e-8261-4431-9c0e-cb2c30e35ca5.png)
 
 ***
