@@ -610,6 +610,8 @@ y es lo mismo que la **Tabla 1 primera parte** pues es la continuación.
 - La tabla 2 considera el tipo de término de la causa 
 ```
 
+## Introducción
+
 La **Tabla 2: primera parte** contiene 658315 (contiene 6 vacíos) registros agrupados en los siguientes campos:
 
 1.1 Tipo de término\
@@ -622,7 +624,29 @@ La **Tabla 2: primera parte** contiene 658315 (contiene 6 vacíos) registros agr
 1.8 Año
 1.9 Mes
 
-El tercero (**total**), es el relevante, pues nos entrega las frecuencias de tipo de término del crimen, delito, falta o disputa según el tipo de infracción a la norma, por área juridiccional, que se asocia a los campos **Corte** y **Tribunal**. 
+El tercero (**total**), es el relevante, pues nos entrega las frecuencias de tipo de término del crimen, delito, falta o disputa según infracción a la norma, por área juridiccional, que se asocia a los campos **Corte** y **Tribunal**. 
+
+## Informe
+
+El campo **informe** contiene 3 categorías (excluyendo los 6 registros vacíos)
+
+1.1 Término de causas por materia y motivo
+1.2 Terminos (sic)
+1.3 Terminos Por Materia
+
+Cada uno asociado a:
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
