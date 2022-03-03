@@ -44,7 +44,8 @@ Vamos a establecer pasos como guía para poder ir extrayendo la información seg
 
 1. Primer paso
 
-¿Cuántas **Cortes** tenemos a nuestra disposición **Corte**?\
+¿Cuántas **Cortes** tenemos a nuestra disposición **Corte**?
+
 Para ello hacemos un filtro en el campo **Corte**: 
 
 ![imagen](https://user-images.githubusercontent.com/50757247/156581224-a96dd67e-8261-4431-9c0e-cb2c30e35ca5.png)
