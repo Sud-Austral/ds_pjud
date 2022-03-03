@@ -32,7 +32,7 @@ La **Tabla 1: primera parte** contiene 539400 registros agrupados en los siguien
 1.7 Año\
 1.8 Mes
 
-El segundo (**total**), es el relevante, pues nos entrega las frecuencias según tipo de
+El segundo (**total**), es el relevante, pues nos entrega las frecuencias según el tipo de
 infracción a la norma por crimen, delito, falta o disputa, por área juridiccional, que se asocia a los campos **Corte** y **Tribunal**. 
 
 **Competencia** es un campo que sólo aparece en los **Juzgados de letras del trabajo**
