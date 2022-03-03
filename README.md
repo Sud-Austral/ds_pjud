@@ -64,7 +64,8 @@ En el campo Informe tenemos dos categorías:
 
 Ingresos Causas Por Materia, cuyas categorías de materias asociadas son:
 
-| infracción normativa|
+|infracción normativa|
+| ---      | 
 |Abandono De Armas O Elementos Sujetas A Control. Art. 14 A.|
 |Abandono De Conyuge O Deparientes Enfermos.|
 
