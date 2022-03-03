@@ -80,8 +80,8 @@ Seleccionemos **Sentencias por Delito**
 En las columna **Materia** tenemos el tipo de delito\
 En la columna **Total** tenemos la frecuencia
 
-
-
+***
+***
 
 
 Hay un respaldo en tablas_unidas_10.rar
