@@ -30,7 +30,7 @@ Vamos a establecer pasos como guía para poder yendo extrayendo la información 
 
 1. Primer paso
 
-En qué corte estamos?
+En qué corte estamos? Para ellos hacemos un filtro 
 
 ![imagen](https://user-images.githubusercontent.com/50757247/156581224-a96dd67e-8261-4431-9c0e-cb2c30e35ca5.png)
 
@@ -41,6 +41,15 @@ Tenemos en ésta tabla 12 Cortes de Apelaciones que van desde Antofagasta a San 
 Elijamos una Corte: **Corte de Apelaciones de San Miguel** 
 
 ![imagen](https://user-images.githubusercontent.com/50757247/156592230-8d350065-a164-4228-a6e6-0901ad1f9dba.png)
+
+Obtenemos un listado de todos los tribunales (que son los estadios juridiccionales propiamente dichos, que dictan sentencias)
+
+Vemos que son de 6 tipos:
+Juzgado de Garantía: Delitos comunes, de sangre, etc.\
+Juzgado de Familia: Cobranzas de pensión de alimentos, visitas a hijos, etc.\
+Tribunal de Juicio Oral En Lo Penal: Delitos gravísimos de sangre o delitos de cuello blanco que involucren alt[isimas cantidades de dinero, etc.\
+Juzgado de Letras del Trabajo: Conflictos de cuelo blanco que resuelven conflictos empleado-empleador, etc.\
+Juzgado de Cobranza: Juicios que particulares o emprezas inician para cobrar deudas pendientes, etc.\
 
 
 ***
