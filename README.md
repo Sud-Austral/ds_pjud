@@ -15,6 +15,8 @@ Están en la carpeta ds_pjud/tablas unidas 10
 ***
 ***
 
+Las tablas 1 y dos fueron divididas para poder ser subidas a github
+
 **Tabla 1: primera parte**:
 
 La tabla contiene 539400 que contiene los siguientes campos:
@@ -42,13 +44,7 @@ Vamos a establecer pasos como guía para poder ir extrayendo la información seg
 
 En qué **Corte** estamos? Para ello hacemos un filtro en el campo **Corte**: 
 
-Corte\
-Corte De Apelaciones De San Miguel\
-Corte De Apelaciones De Santiago\
-Corte De Apelaciones De Talca\
-Corte De Apelaciones De Temuco\
-Corte De Apelaciones De Valdivia\
-Corte De Apelaciones De Valparaiso\
+
 
 ![imagen](https://user-images.githubusercontent.com/50757247/156581224-a96dd67e-8261-4431-9c0e-cb2c30e35ca5.png)
 
@@ -573,6 +569,14 @@ Vamos a establecer pasos como guía para poder ir extrayendo la información seg
 1. Primer paso
 
 En qué **Corte** estamos? Para ello hacemos un filtro en el campo **Corte**: 
+
+Corte\
+Corte De Apelaciones De San Miguel\
+Corte De Apelaciones De Santiago\
+Corte De Apelaciones De Talca\
+Corte De Apelaciones De Temuco\
+Corte De Apelaciones De Valdivia\
+Corte De Apelaciones De Valparaiso
 
 ![imagen](https://user-images.githubusercontent.com/50757247/156650461-15f93bfe-862d-4812-a4e4-00d50c56d728.png)
 
