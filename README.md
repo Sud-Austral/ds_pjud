@@ -41,8 +41,6 @@ Tenemos en ésta tabla 12 Cortes de Apelaciones que van desde la de Antofagasta 
 
 Elijamos una Corte: **Corte de Apelaciones de San Miguel** 
 
-![imagen](https://user-images.githubusercontent.com/50757247/156592230-8d350065-a164-4228-a6e6-0901ad1f9dba.png)
-
 Obtenemos un listado de todos los tribunales (que son los estadios juridiccionales propiamente dichos, que dictan sentencias)
 
 Vemos que son de 6 tipos:
@@ -54,6 +52,10 @@ Juzgado de Familia: Cobranzas de pensión de alimentos, visitas a hijos, etc.
 Tribunal de Juicio Oral En Lo Penal: Delitos gravísimos de sangre o delitos de cuello blanco que involucren alt[isimas cantidades de dinero, etc.
 
 Juzgado de Letras del Trabajo: Conflictos de cuello blanco que resuelven conflictos empleado-empleador, etc.
+
+
+![imagen](https://user-images.githubusercontent.com/50757247/156592230-8d350065-a164-4228-a6e6-0901ad1f9dba.png)
+
 
 Juzgado de Cobranza laboral y previsional: Juicios que particulares emprenden contra empresas para cobrar deudas pendientes, etc.
 ![imagen](https://user-images.githubusercontent.com/50757247/156596134-17abc70c-6529-4c61-aa05-e3165c7b02fa.png)
