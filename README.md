@@ -62,7 +62,7 @@ Seleccionemos el **11° Juzgado De Garantía De Santiago**.
 
 En el campo Informe tenemos dos categorías: 
 
-**Ingresos Causas Por Materia**, cuyas categorías de materias asociadas son:
+2.1.1 **Ingresos Causas Por Materia**, cuyas categorías de materias asociadas son:
 
 |Infracción normativa|
 | ---      | 
@@ -377,7 +377,8 @@ En el campo Informe tenemos dos categorías:
 |Violacion De Morada.|
 |Violacion De Secretos.|
 
-**Sentencias Por Delito**, cuyas categorías de materias asociadas son:
+
+2.1.2 **Sentencias Por Delito**, cuyas categorías de materias asociadas son:
 
 |Infracción normativa|
 | ---      | 
