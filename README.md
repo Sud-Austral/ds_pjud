@@ -16,7 +16,7 @@ Están en la carpeta ds_pjud/tablas unidas 10
 ***
 
 ```diff
-@@ Las tablas 1 y dos fueron divididas para poder ser subidas a github (and bold)@@
+Las tablas 1 y 2 fueron divididas para poder ser subidas a github 
 ```
 
 
