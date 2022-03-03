@@ -9,7 +9,7 @@ entre Enero del 2017 y Diciembre del 2021.
 Agrupadas en 10 tablas, ubicadas en la carpeta ds_pjud/tablas unidas 10/
 divididas las dos primeras en dos.
 
-Tabla 1 primera parte:
+**Tabla 1 primera parte**:
 
 La tabla tiene los siguientes campos, el segundo (**total**) el relevante, pues da las frecuencias según tipo de
 infracción a la norma según categoría (ésto reviste cierto grado de complejidad para su comprensión) y área juridiccional, 
