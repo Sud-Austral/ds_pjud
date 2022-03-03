@@ -600,9 +600,29 @@ Elijamos una Corte: **Corte de Apelaciones de San Miguel**
 
 y es lo mismo que la **Tabla 1 primera parte** pues es la continuación.
 
-
+***
 
 ## **Tabla 2: primera parte**:
+
+***
+
+```diff
+- La tabla 2 considera el tipo de término de la causa 
+```
+
+La **Tabla 2: primera parte** contiene 658315 (contiene 6 vacíos) registros agrupados en los siguientes campos:
+
+1.1 Tipo de término\
+1.2 Materia\
+1.3 Total\
+1.4 Corte\
+1.5 Tribunal\
+1.6 Competencia\
+1.7 Informe\
+1.8 Año
+1.9 Mes
+
+El tercero (**total**), es el relevante, pues nos entrega las frecuencias de tipo de término del crimen, delito, falta o disputa según el tipo de infracción a la norma, por área juridiccional, que se asocia a los campos **Corte** y **Tribunal**. 
 
 
 
