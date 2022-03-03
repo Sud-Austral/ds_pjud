@@ -77,7 +77,7 @@ Tenemos dos categorías en la columna **Informe**:
 
 Seleccionemos **Sentencias por Delito**
 
-En las columna **Materia** tenemos el tipo de delito\
+En las columna **Materia** tenemos el tipo de delito/
 En la columna **Total** tenemos la frecuencia
 
 ***
