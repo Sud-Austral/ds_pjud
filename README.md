@@ -33,6 +33,8 @@ y comprende dos categorías (competencias): Cobranza y Laboral.
 
 Vamos a establecer pasos como guía para poder yendo extrayendo la información según nuestras necesidades:
 
+***
+
 1. Primer paso
 
 En qué **Corte** estamos? Para ellos hacemos un filtro: 
@@ -40,6 +42,8 @@ En qué **Corte** estamos? Para ellos hacemos un filtro:
 ![imagen](https://user-images.githubusercontent.com/50757247/156581224-a96dd67e-8261-4431-9c0e-cb2c30e35ca5.png)
 
 Tenemos en ésta tabla 12 Cortes de Apelaciones que van desde la de Antofagasta a la de San Miguel.
+
+***
 
 2. Segundo paso
 
@@ -49,31 +53,38 @@ Obtenemos un listado de todos los tribunales (que son los estadios juridiccional
 
 Vemos que son de 6 tipos:
 
-Juzgado de Garantía: Delitos comunes, de sangre, etc.
+1. Juzgado de Garantía: Delitos comunes, de sangre, etc.
 
-Juzgado de Familia: Cobranzas de pensión de alimentos, visitas a hijos, etc.
+2. Juzgado de Familia: Cobranzas de pensión de alimentos, visitas a hijos, etc.
 
-Tribunal de Juicio Oral En Lo Penal: Delitos gravísimos de sangre o delitos de cuello blanco que involucren altísimas cantidades de dinero, etc.
+3. Tribunal de Juicio Oral En Lo Penal: Delitos gravísimos de sangre o delitos de cuello blanco que involucren altísimas cantidades de dinero, etc.
 
-Juzgado de Letras del Trabajo: Conflictos de cuello blanco que resuelven conflictos empleado-empleador, etc.
+4. Juzgado de Letras del Trabajo: Conflictos de cuello blanco que resuelven conflictos empleado-empleador, etc.
 
 ![imagen](https://user-images.githubusercontent.com/50757247/156592230-8d350065-a164-4228-a6e6-0901ad1f9dba.png)
 
-Juzgado de Cobranza laboral y previsional: Juicios que particulares emprenden contra empresas para cobrar deudas pendientes, etc.
+5. Juzgado de Cobranza laboral y previsional: Juicios que particulares emprenden contra empresas para cobrar deudas pendientes, etc.
 
 ***
 
+3. Tercer paso
+
+Supongamos deseamos saber la información contenida en el **10° Juzgado de Garantía de Santiago** de la **Corte de Apelaciones de San Miguel**. Hacemos el filtro en tribunal.
+Tenemos dos categorías en la columna **Informe**:
+
+3.1 Ingresos Causas por materia
+3.2 Sentencias por Delito.
+
+Seleccionemos **Sentencias por Delito**
+
+En las columna **Materia** tenemos el tipo de delito\
+En la columna **Total** tenemos la frecuencia
 
 
 
 
 
-
-Tablas unidas 10 contiene toda la información descargada, ordenada y lista para ser analizada.
-Hay un respaldo en el .rar
-
-https://www.pjud.cl/estadisticas/estadisticas-cortes-juzgados
-
+Hay un respaldo en tablas_unidas_10.rar
 ![alt text](pj.jpg)
 
 
