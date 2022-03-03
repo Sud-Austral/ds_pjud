@@ -10,11 +10,9 @@ En Chile existen 17 **Cortes de Apelaciones** que son los circuitos administrati
 
 Toda ésta data se agrupa en 10 tablas cuyas dos primeras están divididas en dos.
 
-Están en la carpeta ds_pjud/tablas unidas 10
+Toda la data está en la carpeta ds_pjud/tablas unidas 10
 
 ***
-***
-
 
 ```diff
 - Las tablas 1 y 2 fueron divididas para poder ser subidas a github 
