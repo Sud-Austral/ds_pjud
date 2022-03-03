@@ -16,14 +16,10 @@ Están en la carpeta ds_pjud/tablas unidas 10
 ***
 
 ```diff
-- text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
+@@ Las tablas 1 y dos fueron divididas para poder ser subidas a github (and bold)@@
 ```
 
-Las tablas 1 y dos fueron divididas para poder ser subidas a github
+
 
 **Tabla 1: primera parte**:
 
