@@ -2,23 +2,19 @@
 
 ## Introducción
 
-Tenemos toda la información contenida en la página oficial del PJUD de Chile, sección estadísticas,\
+Tenemos **toda** la información contenida en la página oficial del PJUD de Chile, sección estadísticas,\
 https://www.pjud.cl/post/estadisticas/
 entre Enero del 2017 y Diciembre del 2021.
 
-En Chile existen 17 **Cortes de Apelaciones** que son los circuitos administrativos donde se organiza estructuralemente el poder judicial en  Chile.
+En Chile existen 17 **Cortes de Apelaciones** que son los circuitos administrativos donde se organiza administrativamente el poder judicial en  Chile, divididos a sus vez en juzgados de garantía (existen de varios tipos, de garantía, de familia, del trabajo, etc.) y tribunales de juicio oral en lo penal.
 
-Agrupadas en 10 tablas, ubicadas en la carpeta ds_pjud/tablas unidas 10/
-divididas las dos primeras en dos.
+Toda ésta data se agrupa en 10 tablas cuyas dos primeras están divididas en dos.
+
+Están en la carpeta ds_pjud/tablas unidas 10/
 
 **Tabla 1 primera parte**:
 
-La tabla tiene los siguientes campos, el segundo (**total**) es el relevante, pues da las frecuencias según tipo de
-infracción a la norma según categoría (ésto reviste cierto grado de complejidad para su comprensión) y área juridiccional, 
-que se asocia a los campos **Corte** y **Tribunal**. **Competencia** es un campo que sólo aparece en los Juzgados de letras del trabajo
-que comprende dos categorías: Cobranza y Laboral.
-
-Entonces, los campos son:
+La tabla tiene los siguientes campos:
 
 Materia\
 Total\
@@ -29,11 +25,17 @@ Informe\
 Año\
 Mes
 
+, el segundo (**total**) es el relevante, pues da las frecuencias según tipo de
+infracción a la norma según categoría (ésto reviste cierto grado de complejidad para su comprensión) y área juridiccional, que se asocia a los campos **Corte** y **Tribunal**. 
+
+**Competencia** es un campo que sólo aparece en los Juzgados de letras del trabajo
+y comprende dos categorías: Cobranza y Laboral.
+
 Vamos a establecer pasos como guía para poder yendo extrayendo la información según nuestras necesidades:
 
 1. Primer paso
 
-En qué **Corte** estamos? Para ellos hacemos un filtro 
+En qué **Corte** estamos? Para ellos hacemos un filtro: 
 
 ![imagen](https://user-images.githubusercontent.com/50757247/156581224-a96dd67e-8261-4431-9c0e-cb2c30e35ca5.png)
 
