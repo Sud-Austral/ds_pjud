@@ -53,7 +53,7 @@ Juzgado de Garantía: Delitos comunes, de sangre, etc.
 
 Juzgado de Familia: Cobranzas de pensión de alimentos, visitas a hijos, etc.
 
-Tribunal de Juicio Oral En Lo Penal: Delitos gravísimos de sangre o delitos de cuello blanco que involucren alt[isimas cantidades de dinero, etc.
+Tribunal de Juicio Oral En Lo Penal: Delitos gravísimos de sangre o delitos de cuello blanco que involucren altísimas cantidades de dinero, etc.
 
 Juzgado de Letras del Trabajo: Conflictos de cuello blanco que resuelven conflictos empleado-empleador, etc.
 
@@ -70,7 +70,7 @@ Juzgado de Cobranza laboral y previsional: Juicios que particulares emprenden co
 
 
 Tablas unidas 10 contiene toda la información descargada, ordenada y lista para ser analizada.
-Respaldo está en el .rar
+Hay un respaldo en el .rar
 
 https://www.pjud.cl/estadisticas/estadisticas-cortes-juzgados
 
