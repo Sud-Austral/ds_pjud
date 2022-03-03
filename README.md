@@ -19,14 +19,14 @@ Están en la carpeta ds_pjud/tablas unidas 10
 
 La tabla tiene los siguientes campos:
 
-Materia\
-Total\
-Corte\
-Tribunal\
-Competencia\
-Informe\
-Año\
-Mes
+1.1 Materia\
+1.2 Total\
+1.3 Corte\
+1.4 Tribunal\
+1.5 Competencia\
+1.6 Informe\
+1.7 Año\
+1.8 Mes
 
 El segundo (**total**) es el relevante, pues da las frecuencias según tipo de
 infracción a la norma según categoría (ésto reviste cierto grado de complejidad para su comprensión) y área juridiccional, que se asocia a los campos **Corte** y **Tribunal**. 
