@@ -21,7 +21,7 @@ Están en la carpeta ds_pjud/tablas unidas 10
 ```
 
 
-**Tabla 1: primera parte**:
+## **Tabla 1: primera parte**:
 
 La **Tabla 1: primera parte** contiene 539400 registros agrupados en los siguientes campos:
 
