@@ -11,7 +11,7 @@ divididas las dos primeras en dos.
 
 **Tabla 1 primera parte**:
 
-La tabla tiene los siguientes campos, el segundo (**total**) el relevante, pues da las frecuencias según tipo de
+La tabla tiene los siguientes campos, el segundo (**total**) es el relevante, pues da las frecuencias según tipo de
 infracción a la norma según categoría (ésto reviste cierto grado de complejidad para su comprensión) y área juridiccional, 
 que se asocia a los campos **Corte** y **Tribunal**. **Competencia** es un campo que sólo aparece en los Juzgados de letras del trabajo
 que comprende dos categorías: Cobranza y Laboral.
