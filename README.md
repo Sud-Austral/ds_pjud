@@ -12,7 +12,8 @@ Toda ésta data se agrupa en 10 tablas cuyas dos primeras están divididas en do
 
 Están en la carpeta ds_pjud/tablas unidas 10
 
-
+***
+***
 
 **Tabla 1: primera parte**:
 
@@ -61,7 +62,7 @@ Seleccionemos el **11° Juzgado De Garantía De Santiago**.
 
 En el campo Informe tenemos dos categorías: 
 
-2.1.1 **Ingresos Causas Por Materia**, cuyas categorías de materias asociadas son:
+2.1.1 **Ingresos Causas Por Materia**, cuyas categorías de materias (primer campo, la infracción normativa) asociadas son:
 
 |Infracción normativa|
 | ---      | 
@@ -377,7 +378,7 @@ En el campo Informe tenemos dos categorías:
 |Violacion De Secretos.|
 
 
-2.1.2 **Sentencias Por Delito**, cuyas categorías de materias asociadas son:
+2.1.2 **Sentencias Por Delito**, cuyas categorías de materias (primer campo, la infracción normativa) asociadas son:
 
 |Infracción normativa|
 | ---      | 
@@ -552,8 +553,32 @@ En el campo Informe tenemos dos categorías:
 |Violacion De Menor De 14 Años.|
 |Violacion De Morada.|
 
+***
+***
+
+**Tabla 1: segunda parte**:
+
+Vamos a establecer pasos como guía para poder ir extrayendo la información según nuestras necesidades:
+
+***
+
+1. Primer paso
+
+En qué **Corte** estamos? Para ello hacemos un filtro en el campo **Corte**: 
+
+![imagen](https://user-images.githubusercontent.com/50757247/156650461-15f93bfe-862d-4812-a4e4-00d50c56d728.png)
 
 
+Tenemos en ésta tabla 12 Cortes de Apelaciones que van desde la de Antofagasta a la de San Miguel.
 
+***
+
+2. Segundo paso
+
+Elijamos una Corte: **Corte de Apelaciones de San Miguel** 
+
+En el campo **tribunal** obtenemos un listado de todos los tribunales (que son los estadios juridiccionales propiamente dichos, los que dictan sentencias), asociados a la **Corte de Apelaciones** respectiva).
+
+Vemos que son de 5 tipos:
 
 
