@@ -72,12 +72,12 @@ Vemos que son de 6 tipos:
 Supongamos deseamos saber la información contenida en el **10° Juzgado de Garantía de Santiago** de la **Corte de Apelaciones de San Miguel**. Hacemos el filtro en tribunal.
 Tenemos dos categorías en la columna **Informe**:
 
-3.1 Ingresos Causas por materia
+3.1 Ingresos Causas por materia\
 3.2 Sentencias por Delito.
 
 Seleccionemos **Sentencias por Delito**
 
-En las columna **Materia** tenemos el tipo de delito/
+En las columna **Materia** tenemos el tipo de delito\
 En la columna **Total** tenemos la frecuencia
 
 ***
